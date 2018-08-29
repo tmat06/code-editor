@@ -1,25 +1,50 @@
 import React from "react";
 import { connect } from "react-redux";
 
+const componentNames = {
+  VarKeyword: VarKeywordToken,
+  VarName: VarNameToken,
+  String: StringToken,
+  Operator: OperatorToken
+};
+
 class CodeEditor extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      lessonPart: {}
+    };
   }
 
   componentDidMount() {
-    const { lessons } = this.props;
-    //call to database would be sent here to retrieve the correct information
+    const { part } = this.props.match.params;
+    const lessonPart = { ...this.props.parts[part - 1] };
+    this.setState({ lessonPart });
+    //call to redux with proper part id
   }
 
   render() {
-    return <div>CodeEditor</div>;
+    console.log("lessonPart", this.state.lessonPart);
+    const CurrentToken = componentNames[type];
+    return (
+      <div>
+        CodeEditor {this.state.lessonPart.title}
+        {this.state.lessonPart.desc}
+        {this.state.lessonPart.tokens
+          ? this.state.lessonPart.tokens.map((val, i) => {
+              return (
+                <CurrentToken value={"VarName"} test={false} prompt={"none"} />
+              );
+            })
+          : ""}
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    state
+    parts: state.parts
   };
 }
 

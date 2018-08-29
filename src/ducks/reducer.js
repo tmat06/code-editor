@@ -1,6 +1,7 @@
 var initialState = {
   parts: [
     {
+      id: 1,
       title: "Lesson 1.1",
       description:
         "We can use the keyword var to declare variables, and name that spot in memory. Name the variable greeting below.",
@@ -13,7 +14,7 @@ var initialState = {
           prompt: "none"
         },
         {
-          type: "varName",
+          type: "VarName",
           value: "greeting",
           test: true,
           prompt: "none"
@@ -22,6 +23,7 @@ var initialState = {
       ]
     },
     {
+      id: 2,
       title: "Lesson 1.2",
       description:
         'Words are represented in memory as a type of data  called "strings". To create a string, we surround a word with quotes. We can also store strings in our variables using the assignment operator (= sign). Store whatever string you want into our greeting variable.',
@@ -50,6 +52,7 @@ var initialState = {
       ]
     },
     {
+      id: 3,
       title: "Lesson 1.3",
       description: "",
       testMode: "clickable",
