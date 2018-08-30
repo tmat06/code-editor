@@ -111,7 +111,7 @@ INSERT INTO parts
 VALUES (2, 2, 'Lesson 2.2', 'This is the second part on the second lesson', 'Clickable');
 
 
-INSERT INTO tokens
+INSERT INTO tokens 
 (number, partnumber, type, value, test, prompt, lessonnumber)
 VALUES(1, 1, 'VarKeyword', 'var', false, 'none', 2)
 
