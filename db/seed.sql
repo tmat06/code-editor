@@ -93,3 +93,52 @@ VALUES (4, 3, 'String', 'hello', false, 'none', 1);
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber)
 VALUES (5, 3, 'Operator', ';', false, 'none', 1);
+
+
+
+----------------------Test Data TAKE OUT LATER--------------------------------
+INSERT INTO lessons
+(number, topic)
+VALUES(2, 'Something Else');
+
+
+INSERT INTO parts
+(number, lessonnumber, title, description, testMode)
+VALUES (1, 2, 'Lesson 2.1', 'This is a test to make sure it works', 'Fill in');
+
+INSERT INTO parts
+(number, lessonnumber, title, description, testMode)
+VALUES (2, 2, 'Lesson 2.2', 'This is the second part on the second lesson', 'Clickable');
+
+
+INSERT INTO tokens 
+(number, partnumber, type, value, test, prompt, lessonnumber)
+VALUES(1, 1, 'VarKeyword', 'var', false, 'none', 2)
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (2, 1, 'VarName', 'notGreeting', true, 'none', 2);
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (3, 1, 'Operator', ';', false, 'none', 2);
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (1, 2, 'VarKeyword', 'var', false, 'none', 2);
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (2, 2, 'VarName', 'netGreeting', true, 'This is totally different', 2);
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (3, 2, 'Operator', '=', false, 'none', 2);
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (4, 2, 'String', 'not gonna say hello', false, 'none', 2);
+
+INSERT INTO tokens
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (5, 2, 'Operator', ';', false, 'none', 2);
