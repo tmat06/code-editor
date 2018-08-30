@@ -17,7 +17,8 @@ CREATE TABLE tokens (id SERIAL PRIMARY KEY,
                     type VARCHAR,
                     value VARCHAR,
                     test BOOLEAN,
-                    prompt VARCHAR)
+                    prompt VARCHAR, 
+                    lessonNumber INT)
 
 
 
@@ -42,53 +43,53 @@ VALUES (3, 1, 'Lesson 1.3', '', 'Clickable');
 
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-values (1, 1, 'VarKeyword', 'var', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+values (1, 1, 'VarKeyword', 'var', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (2, 1, 'VarName', 'greeting', true, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (2, 1, 'VarName', 'greeting', true, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (3, 1, 'Operator', ';', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (3, 1, 'Operator', ';', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES(1, 2, 'VarKeyword', 'var', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES(1, 2, 'VarKeyword', 'var', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (2, 2, 'VarName', 'greeting', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (2, 2, 'VarName', 'greeting', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (3, 2, 'Operator', '=', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (3, 2, 'Operator', '=', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (4, 2, 'String', '', true, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (4, 2, 'String', '', true, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (5, 2, 'Operator', ';', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (5, 2, 'Operator', ';', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (1, 3, 'VarKeyword', 'var', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (1, 3, 'VarKeyword', 'var', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (2, 3, 'VarName', 'greeting', true, 'Click on the variable the value "hello" is stored in');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (2, 3, 'VarName', 'greeting', true, 'Click on the variable the value "hello" is stored in', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (3, 3, 'Operator', '=', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (3, 3, 'Operator', '=', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (4, 3, 'String', 'hello', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (4, 3, 'String', 'hello', false, 'none', 1);
 
 INSERT INTO tokens
-(number, partnumber, type, value, test, prompt)
-VALUES (5, 3, 'Operator', ';', false, 'none');
+(number, partnumber, type, value, test, prompt, lessonNumber)
+VALUES (5, 3, 'Operator', ';', false, 'none', 1);
