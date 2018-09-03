@@ -8,5 +8,6 @@ export default (
   <Switch>
     <Route exact path="/" component={() => <Landing />} />
     <Route path="/lessonPartsList/:lesson" component={LessonPartsList} />
+    <Route path="/:lesson/:part" component={CodeEditor} />
   </Switch>
 );

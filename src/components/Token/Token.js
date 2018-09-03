@@ -12,7 +12,7 @@ export default class Token extends React.Component {
     } else if (typeof input !== type) {
       // return alert('Use the right data type... you used ${typeof input}');
       return false;
-    } else if (value && input && input !== expected) {
+    } else if (value && input && input !== value) {
       //return alert(`Wrong value... we expected: ${expected}');
       return false;
     }
