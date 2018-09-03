@@ -32,13 +32,14 @@ class CodeEditor extends React.Component {
   render() {
     console.log("lessonPart", this.state.lessonPart);
     // const CurrentToken = componentNames[type];
-    const { testMode, id, type, test, prompt } = this.state.lessonPart;
+    const { testMode } = this.state.lessonPart;
     return (
       <div>
         CodeEditor {this.state.lessonPart.title}
         {this.state.lessonPart.desciption}
         {this.state.lessonPart.tokens
           ? this.state.lessonPart.tokens.map((val, i) => {
+              const { id, type, test, prompt } = val;
               const CurrentToken = componentNames[val.type];
               return (
                 <CurrentToken

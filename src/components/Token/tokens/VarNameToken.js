@@ -21,7 +21,6 @@ export default class VarNameToken extends Token {
     const FILL = "Fill in";
     const CLICK = "Clickable";
     const { prompt, value, test, testMode } = this.props;
-    console.log(this.props);
     console.log("VarNameToken", this.props);
     const { input, display } = this.state;
     const boxStyle = {
