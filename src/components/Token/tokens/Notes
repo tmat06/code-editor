@@ -1,0 +1,95 @@
+//VarKeyword
+
+<div
+className="token var-keyword"
+onClick={() => this.setState({ display: "" })}
+>
+{display ||
+  defaultValue || (
+    <input
+      autoFocus
+      onBlur={this.validateToken.bind(this, input, expected, "string")}
+      onKeyUp={e =>
+        e.keyCode === 13
+          ? this.validateToken.call(this, input, expected, "string")
+          : null
+      }
+      defaultValue={input}
+      className="input-box"
+      onChange={e => this.setState({ input: e.target.value })}
+      style={boxStyle}
+    />
+  )}
+</div>
+
+
+//VarName
+
+<div
+className="token var-name"
+onClick={() => this.setState({ display: "" })}
+>
+{
+  <input
+    autoFocus
+    onBlur={() => this.handleBlur(input, value, "string")}
+    onKeyUp={e =>
+      e.keyCode === 13 ? this.handleBlur(input, value, "string") : null
+    }
+    defaultValue={value}
+    className="input-box"
+    onChange={e => this.setState({ input: e.target.value })}
+    style={{
+      width: value && `${value.length}em`,
+      borderColor: "#89BDFF",
+      color: "white"
+    }}
+  />
+}
+</div> 
+
+//StringToken
+<div
+className="token string"
+onClick={() => this.setState({ display: "" })}
+>
+{display ||
+  defaultValue || (
+    <input
+      autoFocus
+      onBlur={this.validateToken.bind(this, input, expected, "string")}
+      onKeyUp={e =>
+        e.keyCode === 13
+          ? this.validateToken.call(this, input, expected, "string")
+          : null
+      }
+      defaultValue={input}
+      className="input-box"
+      onChange={e => this.setState({ input: e.target.value })}
+      style={boxStyle}
+    />
+  )}
+</div>
+
+//OperatorToken
+<div
+className="token operator"
+onClick={() => this.setState({ display: "" })}
+>
+{display ||
+  defaultValue || (
+    <input
+      autoFocus
+      onBlur={this.validateToken.bind(this, input, expected, "string")}
+      onKeyUp={e =>
+        e.keyCode === 13
+          ? this.validateToken.call(this, input, expected, "string")
+          : null
+      }
+      defaultValue={input}
+      className="input-box"
+      onChange={e => this.setState({ input: e.target.value })}
+      style={boxStyle}
+    />
+  )}
+</div> 

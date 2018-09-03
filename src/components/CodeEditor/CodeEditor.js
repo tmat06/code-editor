@@ -4,6 +4,7 @@ import VarKeywordToken from "./../Token/tokens/VarKeywordToken";
 import VarNameToken from "../Token/tokens/VarNameToken";
 import OperatorToken from "./../Token/tokens/OperatorToken";
 import StringToken from "./../Token/tokens/StringToken";
+import "./CodeEditor.css";
 
 const componentNames = {
   VarKeyword: VarKeywordToken,
@@ -30,21 +31,21 @@ class CodeEditor extends React.Component {
   }
 
   render() {
-    console.log("lessonPart", this.state.lessonPart);
-    // const CurrentToken = componentNames[type];
     const { testMode } = this.state.lessonPart;
+    console.log(this.state.lessonPart);
     return (
       <div>
         CodeEditor {this.state.lessonPart.title}
         {this.state.lessonPart.desciption}
         {this.state.lessonPart.tokens
           ? this.state.lessonPart.tokens.map((val, i) => {
-              const { id, type, test, prompt } = val;
+              const { id, type, test, prompt, value } = val;
               const CurrentToken = componentNames[val.type];
               return (
                 <CurrentToken
                   key={id}
-                  value={type}
+                  type={type}
+                  value={value}
                   test={test}
                   prompt={prompt}
                   testMode={testMode}

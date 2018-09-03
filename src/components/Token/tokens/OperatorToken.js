@@ -1,5 +1,7 @@
 import React from "react";
 import Token from "../Token";
+import Clickable from "./Clickable";
+import FillIn from "./FillIn";
 
 // we could use a list of valid inputs to test what they give us
 const validOperators = ["+", "-", "*", "/"];
@@ -14,34 +16,21 @@ export default class StringToken extends Token {
   }
 
   render() {
-    const { defaultValue, locked, expected } = this.props;
-    const { display, input } = this.state;
+    const FILL = "Fill in";
+    const CLICKABLE = "Clickable";
+    const { test, testMode, value } = this.props;
     const boxStyle = {
-      width: expected && `${expected.length}em`,
+      width: value && `${value.length}em`,
       borderColor: `#E6DB74`
     };
-    return (
-      <div
-        className="token operator"
-        onClick={() => this.setState({ display: "" })}
-      >
-        {display ||
-          defaultValue || (
-            <input
-              autoFocus
-              onBlur={this.validateToken.bind(this, input, expected, "string")}
-              onKeyUp={e =>
-                e.keyCode === 13
-                  ? this.validateToken.call(this, input, expected, "string")
-                  : null
-              }
-              defaultValue={input}
-              className="input-box"
-              onChange={e => this.setState({ input: e.target.value })}
-              style={boxStyle}
-            />
-          )}
-      </div>
-    );
+    switch (testMode) {
+      case FILL:
+        return <FillIn value={value} test={test} styles={boxStyle} />;
+      case CLICKABLE:
+        return <Clickable value={value} test={test} styles={boxStyle} />;
+      default:
+        console.log("something went wrong");
+        break;
+    }
   }
 }

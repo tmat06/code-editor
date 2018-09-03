@@ -1,7 +1,7 @@
 import React from "react";
 import Token from "../Token";
 import FillIn from "./FillIn";
-import Click from "./Clickable";
+import Clickable from "./Clickable";
 
 export default class VarNameToken extends Token {
   constructor() {
@@ -19,7 +19,7 @@ export default class VarNameToken extends Token {
 
   render() {
     const FILL = "Fill in";
-    const CLICK = "Clickable";
+    const CLICKABLE = "Clickable";
     const { prompt, value, test, testMode } = this.props;
     console.log("VarNameToken", this.props);
     const { input, display } = this.state;
@@ -33,8 +33,8 @@ export default class VarNameToken extends Token {
     switch (testMode) {
       case FILL:
         return <FillIn value={value} test={test} styles={boxStyle} />;
-      case CLICK:
-        return <Click value={value} test={test} styles={boxStyle} />;
+      case CLICKABLE:
+        return <Clickable value={value} test={test} styles={boxStyle} />;
       default:
         console.log("something went wrong");
         break;
@@ -43,26 +43,3 @@ export default class VarNameToken extends Token {
 }
 
 // value={"VarName"} test={false} prompt={"none"}
-
-/* <div
-className="token var-name"
-onClick={() => this.setState({ display: "" })}
->
-{
-  <input
-    autoFocus
-    onBlur={() => this.handleBlur(input, value, "string")}
-    onKeyUp={e =>
-      e.keyCode === 13 ? this.handleBlur(input, value, "string") : null
-    }
-    defaultValue={value}
-    className="input-box"
-    onChange={e => this.setState({ input: e.target.value })}
-    style={{
-      width: value && `${value.length}em`,
-      borderColor: "#89BDFF",
-      color: "white"
-    }}
-  />
-}
-</div> */
