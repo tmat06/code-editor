@@ -2,6 +2,7 @@ import React from "react";
 import { updateLesson } from "./../ducks/reducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class LessonPartsList extends React.Component {
   constructor() {
@@ -10,6 +11,10 @@ class LessonPartsList extends React.Component {
   }
 
   componentDidMount() {
+    const { lesson } = this.props.match.params;
+    axios.get(`/api/lessons/${lesson}`).then(response => {
+      this.props.updateLesson(response.data);
+    });
     // const { lesson } = this.props.match.params;
     //call to the database using this.props.match.params.lesson to indicate which lesson needs to be pushed up to redux
     //axios.get(`some endpoint/ ${lesson}`).then(res => this.props.updateLesson(res.data))
@@ -26,7 +31,7 @@ class LessonPartsList extends React.Component {
               <Link to={`/${lesson}/${i + 1}`} key={val.id}>
                 <div>
                   {/* can be replaced with val.title once database has correct information */}
-                  {lesson}.{i + 1}
+                  {val.title}
                 </div>
               </Link>
             );
