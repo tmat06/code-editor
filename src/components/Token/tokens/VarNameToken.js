@@ -20,9 +20,16 @@ export default class VarNameToken extends Token {
   render() {
     const FILL = "Fill in";
     const CLICKABLE = "Clickable";
-    const { prompt, value, test, testMode } = this.props;
-    console.log("VarNameToken", this.props);
-    const { input, display } = this.state;
+    console.log(this.props);
+    const {
+      value,
+      test,
+      testMode,
+      type,
+      prompt,
+      title,
+      description
+    } = this.props;
     const boxStyle = {
       width: value && `${value.length}em`,
       borderColor: "#89BDFF",
@@ -32,9 +39,26 @@ export default class VarNameToken extends Token {
     console.log(value, test, testMode);
     switch (testMode) {
       case FILL:
-        return <FillIn value={value} test={test} styles={boxStyle} />;
+        return (
+          <FillIn
+            title={title}
+            description={description}
+            value={value}
+            type={type}
+            test={test}
+            styles={boxStyle}
+          />
+        );
       case CLICKABLE:
-        return <Clickable value={value} test={test} styles={boxStyle} />;
+        return (
+          <Clickable
+            prompt={prompt}
+            value={value}
+            type={type}
+            test={test}
+            styles={boxStyle}
+          />
+        );
       default:
         console.log("something went wrong");
         break;

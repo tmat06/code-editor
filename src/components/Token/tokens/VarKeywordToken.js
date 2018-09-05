@@ -15,7 +15,7 @@ export default class VarKeywordToken extends Token {
   render() {
     const FILL = "Fill in";
     const CLICKABLE = "Clickable";
-    const { test, testMode, value, type } = this.props;
+    const { test, testMode, value, type, prompt } = this.props;
     const boxStyle = {
       width: value && `${value.length}em`,
       borderColor: `#FD5FF1`,
@@ -28,7 +28,13 @@ export default class VarKeywordToken extends Token {
         );
       case CLICKABLE:
         return (
-          <Clickable value={value} type={type} test={test} styles={boxStyle} />
+          <Clickable
+            value={value}
+            prompt={prompt}
+            type={type}
+            test={test}
+            styles={boxStyle}
+          />
         );
       default:
         console.log("something went wrong");
