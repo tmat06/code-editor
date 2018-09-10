@@ -1,0 +1,88 @@
+.code-editor-wrapper {
+  width: 100%;
+  height: calc(100% - 12em);
+  display: flex;
+  justify-content: space-around;
+}
+.instructions {
+  margin-bottom: 1.5em;
+  .description {
+    font-size: 1.15em;
+  }
+}
+.token, input {
+  font-size: 1.5rem;
+  font-family: monospace, sans-serif;
+  margin-right: 0.25em;
+}
+/* the token class will style input in a standard way */
+.token {
+  display: inline-block;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+/* the user agent stylesheet was messing with the input's 
+  font-size, so this was a quick fix */
+input {
+  color: white;
+  text-align: center;
+}
+.input-box {
+  -webkit-appearance: none;
+  background-color: transparent;
+  display: inline-block;
+  height: 1.5em;
+  padding: 0.25em;
+
+  /* default width for when expected value is undefined */
+  width: 7.5em;
+  border: 1px solid white;
+}
+.input-box:hover {
+  cursor: pointer;
+}
+.var-name {
+  color: #89bdff;
+}
+.var-keyword {
+  color: #fd5ff1;
+}
+.operator {
+  color: #e6db74;
+}
+.string {
+  color: #a6e22e;
+}
+.memory-grid {
+  width: 35%;
+  height: 65%;
+  display: flex;
+  flex-wrap: wrap;
+  .memory-location {
+    width: 30%;
+    padding-top: 0.5em;
+    border: 1px solid $memory-green;
+    font-size: 0.85em;
+    font-weight: 300;
+    line-height: 1.15em;
+    text-align: center;
+    .value {
+      font-size: 2em;
+      padding-top: 1em;
+    }
+  }
+  // quick fix for overlapping borders
+  .memory-location:nth-child(2), .memory-location:nth-child(8) {
+    border-left: 0;
+    border-right: 0;
+  }
+  .memory-location:nth-child(4), .memory-location:nth-child(6) {
+    border-top: 0;
+    border-bottom: 0;
+  }
+  .memory-location:nth-child(5) {
+    border: 0;
+  }
+}
