@@ -17,7 +17,11 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+<<<<<<< HEAD
     "redux": "^4.0.0"
+=======
+    "semantic-ui-react": "^0.82.3"
+>>>>>>> master
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

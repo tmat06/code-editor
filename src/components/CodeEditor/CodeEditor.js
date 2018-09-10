@@ -4,6 +4,8 @@ import VarKeywordToken from "./../Token/tokens/VarKeywordToken";
 import VarNameToken from "../Token/tokens/VarNameToken";
 import OperatorToken from "./../Token/tokens/OperatorToken";
 import StringToken from "./../Token/tokens/StringToken";
+import "./CodeEditor.css";
+import { Button, Modal, Header } from "semantic-ui-react";
 
 const componentNames = {
   VarKeyword: VarKeywordToken,
@@ -26,29 +28,33 @@ class CodeEditor extends React.Component {
       const lessonPart = { ...this.props.parts[part - 1] };
       this.setState({ lessonPart });
     }
+
     //call to redux with proper part id
   }
 
   render() {
-    console.log("lessonPart", this.state.lessonPart);
-    // const CurrentToken = componentNames[type];
-    const { testMode } = this.state.lessonPart;
+    const { testMode, title, description } = this.state.lessonPart;
+    console.log(this.state.lessonPart);
     return (
       <div>
-        CodeEditor {this.state.lessonPart.title}
-        {this.state.lessonPart.desciption}
+        {/* Display Modal here */}
+        {title}
+        {description}
         {this.state.lessonPart.tokens
           ? this.state.lessonPart.tokens.map((val, i) => {
-              const { id, type, test, prompt } = val;
+              const { id, type, test, prompt, value } = val;
               const CurrentToken = componentNames[val.type];
               return (
-                <CurrentToken
-                  key={id}
-                  value={type}
-                  test={test}
-                  prompt={prompt}
-                  testMode={testMode}
-                />
+                <div>
+                  <CurrentToken
+                    key={id}
+                    type={type}
+                    value={value}
+                    test={test}
+                    prompt={prompt}
+                    testMode={testMode}
+                  />
+                </div>
               );
             })
           : ""}
