@@ -35,8 +35,8 @@ class CodeEditor extends React.Component {
     const { testMode, title, description } = this.state.lessonPart;
     console.log(this.state.lessonPart);
     return (
-      <div className='code-editor-wrapper'>
-        <div className='card'>
+      <div className="code-editor-wrapper">
+        <div className="card">
           {/* Display Modal here */}
           <h1>{title}</h1>
           <p>{description}</p>
@@ -58,54 +58,54 @@ class CodeEditor extends React.Component {
                 );
               })
             : ""}
-        </div>      
+        </div>
         <section className="memory-grid">
           <div className="memory-location">
             <p>1011</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1012</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1013</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1014</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1015</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1016</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1017</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1018</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
           <div className="memory-location">
             <p>1019</p>
             <p>Var Name</p>
-            <p className='value'>Value</p>
+            <p className="value">Value</p>
           </div>
-        </section> 
+        </section>
       </div>
     );
   }
