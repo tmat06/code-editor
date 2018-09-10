@@ -19,11 +19,11 @@ export default function Landing() {
         <h1>Subsection Title</h1>
         <h3>A great subtitle would be here.</h3>
         <p>Tons of card details. Maybe instructions. Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.Tons of card details. Maybe instructions.</p>
-        <button className="outline-btn">Back</button>
-        <button>Forward</button>
+        <button className="button outline-btn">Back</button>
+        <button className="button">Forward</button>
       </section>
-      <button>Sample primary button</button>
-      <button className="outline-btn">Sample secondary button</button>
+      <button className="button">Sample primary button</button>
+      <button className="button outline-btn">Sample secondary button</button>
       <section className="memory-grid">
         <div className="memory-location">
           <p>1011</p>
