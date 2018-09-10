@@ -38,14 +38,17 @@ class CodeEditor extends React.Component {
       <div className='code-editor-wrapper'>
         <div className='card'>
           {/* Display Modal here */}
-          <h1>{title}</h1>
-          <p>{description}</p>
+          <div className="instructions">
+            <h1>{title}</h1>
+            <h3>{testMode}</h3>
+            <p className='description'>{description}</p>
+          </div>
           {this.state.lessonPart.tokens
             ? this.state.lessonPart.tokens.map((val, i) => {
                 const { id, type, test, prompt, value } = val;
                 const CurrentToken = componentNames[val.type];
                 return (
-                  <div>
+                  <div className="token">
                     <CurrentToken
                       key={id}
                       type={type}

@@ -33,8 +33,9 @@ h2 {
 }
 h3 {
   color: $highlight-red;
-  font-size: 1.25em;
-  line-height: 1.5em;
+  font-size: 2em;
+  line-height: 1.65em;
+  font-weight: 100;
 }
 a {
   text-decoration: none;
@@ -49,17 +50,18 @@ nav {
   position: sticky;
   width: 100%;
   height: 4em;
-  margin-bottom: 2em;
+  margin-bottom: 3.5em;
   text-align: center;
   ul {
     height: 100%;
     display: flex;
     li {
-      width: 7.5%;
+      width: 7.5em;
       height: 100%;
       padding: 1em;
       font-size: 1.5em;
       border-right: 1px solid white;
+      cursor: pointer;
     }
     li:nth-child(1):hover {
       box-shadow: 0 3.5px 2px -1px $highlight-red;
@@ -82,7 +84,7 @@ nav {
   background-color: $highlight-red;
   border: 1px solid $highlight-red;
   margin: 0.5em;
-  // padding-top: 1em;
+  padding-top: 1em;
 }
 .button:hover {
   color: $light-gray;
@@ -105,23 +107,4 @@ nav {
   border-radius: 2px;
   width: 50%;
 }
-.memory-grid {
-  width: 40%;
-  height: 60%;
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 3em;
-  .memory-location {
-    width: 30%;
-    padding-top: 0.5em;
-    border: 1px solid $memory-green;
-    font-size: 0.85em;
-    font-weight: 300;
-    line-height: 1.15em;
-    text-align: center;
-    .value {
-      font-size: 2em;
-      padding-top: 1em;
-    }
-  }
-}
+
