@@ -3,15 +3,23 @@
   height: calc(100% - 10em);
   margin: 3em;
   display: flex;
+  justify-content: space-between;
+}
+.description {
+  font-size: 1.15em;
+}
+.instructions {
+  margin-bottom: 1.5em;
 }
 .token, input {
-  font-size: 1.15em;
+  // font-size: 1.15rem;
+  font-size: 1.5rem;
   font-family: monospace, sans-serif;
+  margin-right: 0.25em;
 }
 /* the token class will style input in a standard way */
 .token {
   display: inline-block;
-  padding-right: 0.5em;
 }
 textarea:focus,
 input:focus {
@@ -24,16 +32,14 @@ input {
   text-align: center;
   padding-bottom: 0.25em;
 }
-.nav-links {
-  height: auto;
-}
 .input-box {
   -webkit-appearance: none;
   background-color: transparent;
   display: inline-block;
   height: 1em;
+
   /* default width for when expected value is undefined */
-  width: 6em;
+  width: 7.5em;
   border: 2.5px solid white;
 }
 .input-box:hover {
@@ -50,4 +56,24 @@ input {
 }
 .string {
   color: #a6e22e;
+}
+.memory-grid {
+  width: 40%;
+  height: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 4.5em;
+  .memory-location {
+    width: 30%;
+    padding-top: 0.5em;
+    border: 1px solid $memory-green;
+    font-size: 0.85em;
+    font-weight: 300;
+    line-height: 1.15em;
+    text-align: center;
+    .value {
+      font-size: 2em;
+      padding-top: 1em;
+    }
+  }
 }
