@@ -55,7 +55,7 @@ nav {
     height: 100%;
     display: flex;
     li {
-      width: 15%;
+      width: 7.5%;
       height: 100%;
       padding: 1em;
       font-size: 1.5em;
@@ -104,14 +104,13 @@ nav {
   background-color: $light-gray;
   border-radius: 2px;
   width: 50%;
-  height: calc(100% - 10em);
-  margin: 3em;
 }
 .memory-grid {
   width: 40%;
   height: 60%;
   display: flex;
   flex-wrap: wrap;
+  margin-left: 3em;
   .memory-location {
     width: 30%;
     padding-top: 0.5em;

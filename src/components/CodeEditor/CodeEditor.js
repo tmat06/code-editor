@@ -39,7 +39,7 @@ class CodeEditor extends React.Component {
         <div className='card'>
           {/* Display Modal here */}
           <h1>{title}</h1>
-          {description}
+          <p>{description}</p>
           {this.state.lessonPart.tokens
             ? this.state.lessonPart.tokens.map((val, i) => {
                 const { id, type, test, prompt, value } = val;
