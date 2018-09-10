@@ -60,6 +60,7 @@ input {
   height: 65%;
   display: flex;
   flex-wrap: wrap;
+
   .memory-location {
     width: 30%;
     padding-top: 0.5em;
@@ -72,5 +73,17 @@ input {
       font-size: 2em;
       padding-top: 1em;
     }
+  }
+  // quick fix for overlapping borders
+  .memory-location:nth-child(2), .memory-location:nth-child(8) {
+    border-left: 0;
+    border-right: 0;
+  }
+  .memory-location:nth-child(4), .memory-location:nth-child(6) {
+    border-top: 0;
+    border-bottom: 0;
+  }
+  .memory-location:nth-child(5) {
+    border: 0;
   }
 }
