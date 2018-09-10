@@ -4,11 +4,11 @@
   display: flex;
   justify-content: space-around;
 }
-.description {
-  font-size: 1.15em;
-}
 .instructions {
   margin-bottom: 1.5em;
+  .description {
+    font-size: 1.15em;
+  }
 }
 .token, input {
   font-size: 1.5rem;
@@ -60,7 +60,6 @@ input {
   height: 65%;
   display: flex;
   flex-wrap: wrap;
-
   .memory-location {
     width: 30%;
     padding-top: 0.5em;
