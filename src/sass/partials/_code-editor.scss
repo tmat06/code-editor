@@ -28,13 +28,13 @@ input:focus {
 input {
   color: white;
   text-align: center;
-  padding-bottom: 0.25em;
 }
 .input-box {
   -webkit-appearance: none;
   background-color: transparent;
   display: inline-block;
-  height: 1em;
+  height: 1.8em;
+  padding: 0.4em;
 
   /* default width for when expected value is undefined */
   width: 7.5em;
