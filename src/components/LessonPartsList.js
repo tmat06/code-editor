@@ -29,7 +29,7 @@ class LessonPartsList extends React.Component {
           parts.map((val, i) => {
             return (
               <Link to={`/${lesson}/${i + 1}`} key={val.id}>
-                <div>
+                <div className='button outline-btn'>
                   {/* can be replaced with val.title once database has correct information */}
                   {val.title}
                 </div>

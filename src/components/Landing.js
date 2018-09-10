@@ -3,16 +3,15 @@ import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
-    <div>
-      Landing
+    <div class="landing">
       <Link to="/lessonPartsList/1">
-        <div>Lesson 1</div>
+        <div className="button">Lesson 1</div>
       </Link>
       <Link to="/lessonPartsList/2">
-        <div>Lesson 2</div>
+        <div className="button">Lesson 2</div>
       </Link>
       <Link to="/lessonPartsList/3">
-        <div>Lesson 3</div>
+        <div className="button">Lesson 3</div>
       </Link>
     </div>
   );
