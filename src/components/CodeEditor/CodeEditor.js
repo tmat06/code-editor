@@ -4,7 +4,7 @@ import VarKeywordToken from "./../Token/tokens/VarKeywordToken";
 import VarNameToken from "../Token/tokens/VarNameToken";
 import OperatorToken from "./../Token/tokens/OperatorToken";
 import StringToken from "./../Token/tokens/StringToken";
-import { Button, Modal, Header } from "semantic-ui-react";
+// import { Button, Modal, Header } from "semantic-ui-react";
 
 const componentNames = {
   VarKeyword: VarKeywordToken,

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 export default function Landing() {
   return (
-    <div class="landing">
+    <div className="landing">
       <nav>
         <ul>
           <li>First</li>

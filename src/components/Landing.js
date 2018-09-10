@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
-    <div class="landing">
+    <div className="landing">
       <Link to="/lessonPartsList/1">
         <div className="button">Lesson 1</div>
       </Link>
