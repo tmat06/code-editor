@@ -45,6 +45,7 @@ class CodeEditor extends React.Component {
 
   render() {
     const { testMode, title, description, tokens } = this.state.lessonPart;
+    console.log(this.state.lessonPart);
     return (
       <div className="code-editor-wrapper">
         <div className="card">
@@ -59,9 +60,6 @@ class CodeEditor extends React.Component {
                 const { id, type, test, prompt, value, connector } = val;
 
                 const CurrentToken = componentNames[val.type];
-                if (val.value === "hello") {
-                  console.log("connector", connector);
-                }
                 return (
                   <div className="token">
                     <CurrentToken
@@ -82,13 +80,43 @@ class CodeEditor extends React.Component {
           {this.state.gridValues.map((val, i) => {
             return (
               <div className="memory-location">
-                <p>{val.num}</p>
-                <p>
+                <p
+                  style={
+                    this.props.correct
+                      ? {}
+                      : {
+                          color: "transparent",
+                          textShadow: "0 0 5px rgba(250,250,250,250.5)"
+                        }
+                  }
+                >
+                  {val.num}
+                </p>
+                <p
+                  style={
+                    this.props.correct
+                      ? {}
+                      : {
+                          color: "transparent",
+                          textShadow: "0 0 15px rgba(250,250,250,250.5)"
+                        }
+                  }
+                >
                   {this.props.gridValues[i]
                     ? this.props.gridValues[i].varName
                     : val.name}
                 </p>
-                <p className="value">
+                <p
+                  className="value"
+                  style={
+                    this.props.correct
+                      ? {}
+                      : {
+                          color: "transparent",
+                          textShadow: "0 0 15px rgba(250,250,250,250.5)"
+                        }
+                  }
+                >
                   {this.props.gridValues[i]
                     ? this.props.gridValues[i].value
                     : val.value}
@@ -105,7 +133,8 @@ class CodeEditor extends React.Component {
 function mapStateToProps(state) {
   return {
     parts: state.parts,
-    gridValues: state.gridValues
+    gridValues: state.gridValues,
+    correct: state.correct
   };
 }
 
