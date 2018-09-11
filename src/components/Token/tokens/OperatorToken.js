@@ -18,7 +18,7 @@ export default class StringToken extends Token {
   render() {
     const FILL = "Fill in";
     const CLICKABLE = "Clickable";
-    const { test, testMode, value, type, prompt } = this.props;
+    const { test, testMode, value, type, prompt, connector } = this.props;
     const boxStyle = {
       width: value && `${value.length}em`,
       borderColor: `#E6DB74`
@@ -26,7 +26,13 @@ export default class StringToken extends Token {
     switch (testMode) {
       case FILL:
         return (
-          <FillIn value={value} type={type} test={test} styles={boxStyle} />
+          <FillIn
+            value={value}
+            type={type}
+            test={test}
+            styles={boxStyle}
+            connector={connector}
+          />
         );
       case CLICKABLE:
         return (

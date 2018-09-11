@@ -20,7 +20,6 @@ export default class VarNameToken extends Token {
   render() {
     const FILL = "Fill in";
     const CLICKABLE = "Clickable";
-    console.log(this.props);
     const {
       value,
       test,
@@ -28,7 +27,8 @@ export default class VarNameToken extends Token {
       type,
       prompt,
       title,
-      description
+      description,
+      connector
     } = this.props;
     const boxStyle = {
       width: value && `${value.length}em`,
@@ -36,7 +36,6 @@ export default class VarNameToken extends Token {
       transform: "translateX(0px)",
       color: "white"
     };
-    console.log(value, test, testMode);
     switch (testMode) {
       case FILL:
         return (
@@ -47,6 +46,7 @@ export default class VarNameToken extends Token {
             type={type}
             test={test}
             styles={boxStyle}
+            connector={connector}
           />
         );
       case CLICKABLE:
