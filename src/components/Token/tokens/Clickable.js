@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { updateGridValues, toggleAnswer } from "./../../../ducks/reducer";
 
-export default class Clickable extends React.Component {
+class Clickable extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -11,15 +13,23 @@ export default class Clickable extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.test) this.setState({ display: this.props.value });
+    let { value, connector, type, test } = this.props;
+    if (!test) this.setState({ display: this.props.value });
+    this.props.updateGridValues({ value, connector, type });
+    if (this.props.correct) this.props.toggleAnswer();
   }
 
   validateToken(test) {
     if (test) {
       this.setState({ correct: true });
+      this.props.toggleAnswer();
     } else {
       alert("Wrong Homie");
     }
+  }
+
+  componentWillUnmount() {
+    if (!this.props.correct) this.props.toggleAnswer();
   }
 
   render() {
@@ -75,3 +85,14 @@ export default class Clickable extends React.Component {
     }
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    correct: state.correct
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { updateGridValues, toggleAnswer }
+)(Clickable);
