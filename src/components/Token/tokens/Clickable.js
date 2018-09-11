@@ -1,5 +1,5 @@
 import React from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { updateGridValues, toggleAnswer } from "./../../../ducks/reducer";
 
@@ -21,9 +21,11 @@ class Clickable extends React.Component {
   }
 
   validateToken(test) {
-    if (test) {
+    if (test && !this.state.correct) {
       this.setState({ correct: true });
       this.props.toggleAnswer();
+    } else if (test && this.state.correct) {
+      toast.success("You already got it correct");
     } else {
       toast.error("Wrong Homie");
     }
