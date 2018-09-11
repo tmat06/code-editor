@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from 'react-toastify';
 
 export default class Clickable extends React.Component {
   constructor() {
@@ -18,14 +19,14 @@ export default class Clickable extends React.Component {
     if (test) {
       this.setState({ correct: true });
     } else {
-      alert("Wrong Homie");
+      toast.error("Wrong Homie");
     }
   }
 
   render() {
     const { value, styles, type, test } = this.props;
     if (this.state.correct) {
-      alert("Thats Correct! Task Complete");
+      toast.success("Thats Correct! Task Complete");
     }
     switch (type) {
       case "VarKeyword":
