@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./ducks/store";
 
 // all styling imported here
-import './sass/main.css';
+import "./sass/main.css";
 
 ReactDOM.render(
   <Provider store={store}>
