@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { updateGridValues } from "./../../../ducks/reducer";
 
-export default class FillIn extends React.Component {
+class FillIn extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -10,7 +12,9 @@ export default class FillIn extends React.Component {
   }
 
   componentDidMount() {
+    let { value, connector, type, test } = this.props;
     if (!this.props.test) this.setState({ display: this.props.value });
+    if (!test) this.props.updateGridValues({ value, connector, type });
   }
 
   testValidator(test) {
@@ -19,7 +23,8 @@ export default class FillIn extends React.Component {
     }
   }
 
-  validateToken = (input, value, type) => {
+  validateToken = (input, connector, token, type) => {
+    let { value } = this.props;
     //Needs Work
     +input ? (input = +input) : (input = input);
     if (!input) {
@@ -31,11 +36,16 @@ export default class FillIn extends React.Component {
     }
     // all tests have passed, so we can update our display;
     this.setState({ display: input });
+
+    // need the varname and the value passed here
+    console.log(input, connector, token);
+    this.props.updateGridValues({ value: input, connector, type: token });
   };
 
   render() {
-    const { value, styles, type, test } = this.props;
+    const { styles, type, test, connector } = this.props;
     const { input, display } = this.state;
+
     switch (type) {
       case "VarKeyword":
         return (
@@ -46,10 +56,12 @@ export default class FillIn extends React.Component {
             {display || (
               <input
                 autoFocus
-                onBlur={() => this.validateToken(input, value, "string")}
+                onBlur={() =>
+                  this.validateToken(input, connector, type, "string")
+                }
                 onKeyUp={e =>
                   e.keyCode === 13
-                    ? this.validateToken(input, value, "string")
+                    ? this.validateToken(input, connector, type, "string")
                     : null
                 }
                 className="input-box"
@@ -68,15 +80,22 @@ export default class FillIn extends React.Component {
             {display || (
               <input
                 autoFocus
-                onBlur={() => this.validateToken(input, value, "string")}
+                onBlur={() =>
+                  this.validateToken(input, connector, type, "string")
+                }
                 onKeyUp={e =>
                   e.keyCode === 13
-                    ? this.validateToken(input, value, "string")
+                    ? this.validateToken(input, connector, type, "string")
                     : null
                 }
                 defaultValue={input}
                 className="input-box"
-                onChange={e => this.setState({ input: e.target.value })}
+                onChange={e =>
+                  this.setState({
+                    input: e.target.value,
+                    varName: e.target.value
+                  })
+                }
                 style={styles}
               />
             )}
@@ -91,15 +110,22 @@ export default class FillIn extends React.Component {
             {display || (
               <input
                 autoFocus
-                onBlur={() => this.validateToken(input, value, "string")}
+                onBlur={() =>
+                  this.validateToken(input, connector, type, "string")
+                }
                 onKeyUp={e =>
                   e.keyCode === 13
-                    ? this.validateToken(input, value, "string")
+                    ? this.validateToken(input, connector, type, "string")
                     : null
                 }
-                defaultValue={value}
+                defaultValue={input}
                 className="input-box"
-                onChange={e => this.setState({ input: e.target.value })}
+                onChange={e =>
+                  this.setState({
+                    input: e.target.value,
+                    varValue: e.target.value
+                  })
+                }
                 style={styles}
               />
             )}
@@ -114,10 +140,12 @@ export default class FillIn extends React.Component {
             {display || (
               <input
                 autoFocus
-                onBlur={() => this.validateToken(input, value, "string")}
+                onBlur={() =>
+                  this.validateToken(input, connector, type, "string")
+                }
                 onKeyUp={e =>
                   e.keyCode === 13
-                    ? this.validateToken(input, value, "string")
+                    ? this.validateToken(input, connector, type, "string")
                     : null
                 }
                 defaultValue={input}
@@ -138,3 +166,12 @@ export default class FillIn extends React.Component {
     }
   }
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(
+  mapStateToProps,
+  { updateGridValues }
+)(FillIn);

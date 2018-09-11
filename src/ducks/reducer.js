@@ -18,42 +18,61 @@ var initialState = {
       ]
     }
   ],
-  gridValues: [
-    { num: 1011, name: "Var Name", value: "Value" },
-    { num: 1012, name: "Var Name", value: "Value" },
-    { num: 1013, name: "Var Name", value: "Value" },
-    { num: 1014, name: "Var Name", value: "Value" },
-    { num: 1015, name: "Var Name", value: "Value" },
-    { num: 1016, name: "Var Name", value: "Value" },
-    { num: 1017, name: "Var Name", value: "Value" },
-    { num: 1018, name: "Var Name", value: "Value" },
-    { num: 1019, name: "Var Name", value: "Value" }
-  ]
-  // title: "",
-  // description: "",
-  // testMode: "",
-  // tokens: [
-  //   {
-  //     type: "",
-  //     value: "",
-  //     test: "",
-  //     prompt: ""
-  //   }
-  // ]
+  gridValues: []
 };
 
 //define action.type's
 const UPDATE_LESSON = "UPDATE_LESSON";
 const UPDATE_GRID_VALUES = "UPDATE_GRID_VALUES";
+const RESET_GRID_VALUES = "RESET_GRID_VALUES";
 //
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_LESSON:
       return Object.assign({}, state, { parts: action.payload });
+
     case UPDATE_GRID_VALUES:
+      console.log(state);
       let temp = [...state.gridValues];
-      var { varName, value } = action.payload;
+      let match = {};
+      var { value, connector, type } = action.payload;
+
+      if (type === "VarName") {
+        let index;
+        temp.map((val, i) => {
+          if (val.value === connector) {
+            index = i;
+            match = val;
+          }
+        });
+        if (match[0]) {
+          temp[index].varName = value;
+        } else {
+          match = { value: "", varName: value };
+          temp.push(match);
+        }
+      } else if (type === "String") {
+        let index;
+        temp.map((val, i) => {
+          if (val.varName === connector) {
+            index = i;
+            match = val;
+          }
+        });
+
+        if (match.varName || match.value) {
+          temp[index].value = value;
+        } else {
+          match = { value: value, varName: "" };
+          temp.push(match);
+        }
+      }
+      // temp.push({ varName, varValue });
+      return Object.assign({}, state, { gridValues: [...temp] });
+
+    case RESET_GRID_VALUES:
+      return Object.assign({}, state, { gridValues: [] });
     default:
       return state;
   }
@@ -66,4 +85,8 @@ export function updateLesson(lesson) {
 
 export function updateGridValues(value) {
   return { type: UPDATE_GRID_VALUES, payload: value };
+}
+
+export function resetGridValues() {
+  return { type: RESET_GRID_VALUES };
 }
