@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from 'react-toastify';
 import { connect } from "react-redux";
 import { updateGridValues, toggleAnswer } from "./../../../ducks/reducer";
 
@@ -24,7 +25,7 @@ class Clickable extends React.Component {
       this.setState({ correct: true });
       this.props.toggleAnswer();
     } else {
-      alert("Wrong Homie");
+      toast.error("Wrong Homie");
     }
   }
 
@@ -35,7 +36,7 @@ class Clickable extends React.Component {
   render() {
     const { value, styles, type, test } = this.props;
     if (this.state.correct) {
-      alert("Thats Correct! Task Complete");
+      toast.success("Thats Correct! Task Complete");
     }
     switch (type) {
       case "VarKeyword":
