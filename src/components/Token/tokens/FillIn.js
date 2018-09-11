@@ -30,9 +30,9 @@ class FillIn extends React.Component {
     if (!input) {
       return;
     } else if (typeof input !== type) {
-      return console.log("wrong input type");
+      alert("wrong input type");
     } else if (value && input && input !== value) {
-      return console.log(`Wrong value... we expected: ${value}`);
+      alert(`Wrong value... we expected: ${value}`);
     }
     // all tests have passed, so we can update our display;
     this.setState({ display: input });
@@ -64,7 +64,7 @@ class FillIn extends React.Component {
                     ? this.validateToken(input, connector, type, "string")
                     : null
                 }
-                className="input-box"
+                className="input-box animated shake infinite"
                 onChange={e => this.setState({ input: e.target.value })}
                 style={styles}
               />
