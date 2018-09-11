@@ -61,7 +61,7 @@ VALUES(1, 2, 'VarKeyword', 'var', false, 'none', 1, "undefined");
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
-VALUES (2, 2, 'VarName', 'greeting', false, 'none', 1, "hello");
+VALUES (2, 2, 'VarName', 'greeting', false, 'none', 1, '"hello"');
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
@@ -69,7 +69,7 @@ VALUES (3, 2, 'Operator', '=', false, 'none', 1, "undefined");
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
-VALUES (4, 2, 'String', 'hello', true, 'none', 1, "greeting");
+VALUES (4, 2, 'String', '"hello"', true, 'none', 1, "greeting");
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
@@ -81,7 +81,7 @@ VALUES (1, 3, 'VarKeyword', 'var', false, 'none', 1, "undefined");
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
-VALUES (2, 3, 'VarName', 'greeting', true, 'none', 1, "hello");
+VALUES (2, 3, 'VarName', 'greeting', true, 'none', 1, '"hello"');
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
@@ -89,7 +89,7 @@ VALUES (3, 3, 'Operator', '=', false, 'none', 1, "undefined");
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)
-VALUES (4, 3, 'String', 'hello', false, 'none', 1, "greeting");
+VALUES (4, 3, 'String', '"hello"', false, 'none', 1, "greeting");
 
 INSERT INTO tokens
 (number, partnumber, type, value, test, prompt, lessonNumber, connector)

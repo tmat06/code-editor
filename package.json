@@ -5,6 +5,7 @@
   "main": "./server/index.js",
   "proxy": "http://localhost:3007",
   "dependencies": {
+    "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
