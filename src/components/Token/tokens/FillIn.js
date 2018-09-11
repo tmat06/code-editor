@@ -34,13 +34,14 @@ class FillIn extends React.Component {
       toast.error("wrong input type");
     } else if (value && input && input !== value) {
       toast.error(`Wrong value... we expected: ${value}`);
+    }else {
+      // all tests have passed, so we can update our display;
+      this.setState({ display: input });
+  
+      // need the varname and the value passed here
+      console.log(input, connector, token);
+      this.props.updateGridValues({ value: input, connector, type: token });
     }
-    // all tests have passed, so we can update our display;
-    this.setState({ display: input });
-
-    // need the varname and the value passed here
-    console.log(input, connector, token);
-    this.props.updateGridValues({ value: input, connector, type: token });
   };
 
   render() {
@@ -65,7 +66,7 @@ class FillIn extends React.Component {
                     ? this.validateToken(input, connector, type, "string")
                     : null
                 }
-                className="input-box animated shake infinite"
+                className="input-box"
                 onChange={e => this.setState({ input: e.target.value })}
                 style={styles}
               />
