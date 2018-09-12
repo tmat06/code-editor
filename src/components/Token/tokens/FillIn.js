@@ -1,14 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updateGridValues } from "./../../../ducks/reducer";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { Motion, spring, presets } from "react-motion";
 
 class FillIn extends React.Component {
   constructor() {
     super();
     this.state = {
       input: "",
-      display: ""
+      display: "",
+      error: false
     };
   }
 
@@ -31,13 +33,23 @@ class FillIn extends React.Component {
     if (!input) {
       return;
     } else if (typeof input !== type) {
+      this.setState({ error: !this.state.error }, () => {
+        setTimeout(() => {
+          this.setState({ error: !this.state.error });
+        }, 1000);
+      });
       toast.error("wrong input type");
     } else if (value && input && input !== value) {
+      this.setState({ error: !this.state.error }, () => {
+        setTimeout(() => {
+          this.setState({ error: !this.state.error });
+        }, 1000);
+      });
       toast.error(`Wrong value... we expected: ${value}`);
-    }else {
+    } else {
       // all tests have passed, so we can update our display;
       this.setState({ display: input });
-  
+
       // need the varname and the value passed here
       console.log(input, connector, token);
       this.props.updateGridValues({ value: input, connector, type: token });
@@ -75,33 +87,57 @@ class FillIn extends React.Component {
         );
       case "VarName":
         return (
-          <div
-            className="token var-name"
-            onClick={() => this.testValidator(test)}
+          <Motion
+            defaultStyle={{ x: 0 }}
+            style={{
+              x: this.state.error
+                ? spring(20, presets.wobbly)
+                : spring(0, presets.wobbly)
+            }}
           >
-            {display || (
-              <input
-                autoFocus
-                onBlur={() =>
-                  this.validateToken(input, connector, type, "string")
-                }
-                onKeyUp={e =>
-                  e.keyCode === 13
-                    ? this.validateToken(input, connector, type, "string")
-                    : null
-                }
-                defaultValue={input}
-                className="input-box"
-                onChange={e =>
-                  this.setState({
-                    input: e.target.value,
-                    varName: e.target.value
-                  })
-                }
-                style={styles}
-              />
-            )}
-          </div>
+            {mot => {
+              return (
+                <div
+                  className="token var-name"
+                  onClick={() => this.testValidator(test)}
+                >
+                  {display || (
+                    <input
+                      autoFocus
+                      onBlur={() =>
+                        this.validateToken(input, connector, type, "string")
+                      }
+                      onKeyUp={e =>
+                        e.keyCode === 13
+                          ? this.validateToken(input, connector, type, "string")
+                          : null
+                      }
+                      defaultValue={input}
+                      className="input-box"
+                      onChange={e =>
+                        this.setState({
+                          input: e.target.value,
+                          varName: e.target.value
+                        })
+                      }
+                      style={
+                        this.state.error
+                          ? {
+                              width:
+                                this.props.value &&
+                                `${this.props.value.length}em`,
+                              borderColor: "red",
+                              transform: `translateX(${mot.x}px)`,
+                              color: "red"
+                            }
+                          : styles
+                      }
+                    />
+                  )}
+                </div>
+              );
+            }}
+          </Motion>
         );
       case "String":
         return (

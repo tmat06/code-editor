@@ -33,7 +33,6 @@ export default class VarNameToken extends Token {
     const boxStyle = {
       width: value && `${value.length}em`,
       borderColor: "#89BDFF",
-      transform: "translateX(0px)",
       color: "white"
     };
     switch (testMode) {
