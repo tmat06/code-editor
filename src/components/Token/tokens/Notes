@@ -93,3 +93,8 @@ onClick={() => this.setState({ display: "" })}
     />
   )}
 </div> 
+
+
+Clickable
+does this need to go in the component did mount of Clickable?
+    // if (!test) this.setState({ display: this.props.value });

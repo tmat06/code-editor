@@ -1,12 +1,11 @@
 import React from "react";
-import Token from "../Token";
 import Clickable from "./Clickable";
 import FillIn from "./FillIn";
 
 // we could use a list of valid inputs to test what they give us
 const validOperators = ["+", "-", "*", "/"];
 
-export default class StringToken extends Token {
+export default class StringToken extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -23,6 +22,7 @@ export default class StringToken extends Token {
       width: value && `${value.length}em`,
       borderColor: `#E6DB74`
     };
+    //Will render correct Test Mode based on Prop
     switch (testMode) {
       case FILL:
         return (

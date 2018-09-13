@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 import { updateGridValues } from "./../../../ducks/reducer";
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
 class FillIn extends React.Component {
@@ -14,10 +14,12 @@ class FillIn extends React.Component {
   }
 
   componentDidMount() {
-    console.log("test");
     let { value, connector, type, test } = this.props;
-    if (!test) this.setState({ display: value });
-    if (!test) this.props.updateGridValues({ value, connector, type });
+    //If Token is not testable, allow it's value to be displayed and update on Grid via redux
+    if (!test) {
+      this.setState({ display: value });
+      this.props.updateGridValues({ value, connector, type });
+    }
   }
 
   testValidator(test) {
@@ -28,11 +30,12 @@ class FillIn extends React.Component {
 
   validateToken = (input, connector, token, type) => {
     let { value } = this.props;
-    //Needs Work
+    //Converts user input into a Number if possible, else keeps to a String
     +input ? (input = +input) : (input = input);
     if (!input) {
       return;
     } else if (typeof input !== type) {
+      //Triggers Error Animation
       this.setState({ wrong: true });
       setTimeout(() => {
         this.setState({ wrong: false });
@@ -45,11 +48,8 @@ class FillIn extends React.Component {
       }, 1000);
       toast.error(`Wrong value... we expected: ${value}`);
     } else {
-      // all tests have passed, so we can update our display;
+      // all tests have passed, so we can update our display and redux;
       this.setState({ display: input });
-
-      // need the varname and the value passed here
-      console.log(input, connector, token);
       this.props.updateGridValues({ value: input, connector, type: token });
     }
   };
@@ -58,6 +58,7 @@ class FillIn extends React.Component {
     const { styles, type, test, connector } = this.props;
     const { input, display } = this.state;
 
+    // Render based on the type of the Token
     switch (type) {
       case "VarKeyword":
         return (
@@ -90,7 +91,7 @@ class FillIn extends React.Component {
       case "VarName":
         return (
           <div
-            className="token var-keyword"
+            className="token var-name"
             onClick={() => this.testValidator(test)}
           >
             {display || (
