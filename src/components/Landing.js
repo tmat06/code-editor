@@ -1,18 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-export default function Landing() {
-  return (
-    <div className="landing">
-      <Link to="/lessonPartsList/1">
-        <div className="button">Lesson 1</div>
-      </Link>
-      <Link to="/lessonPartsList/2">
-        <div className="button">Lesson 2</div>
-      </Link>
-      <Link to="/lessonPartsList/3">
-        <div className="button">Lesson 3</div>
-      </Link>
-    </div>
-  );
+export default class Landing extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      lessons: []
+    };
+  }
+
+  componentDidMount() {
+    //needs to store all lessons
+    axios
+      .get("/api/lessons")
+      .then(results => this.setState({ lessons: [...results] }));
+  }
+
+  render() {
+    console.log(this.state.lessons);
+    let { lessons } = this.state;
+    return (
+      <div>
+        {lessons.map((val, i) => {
+          return (
+            <div className="landing">
+              <div className="button">Lesson </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 }
