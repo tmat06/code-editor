@@ -42,8 +42,15 @@ class CodeEditor extends React.Component {
     //resets any previous redux changes for the grid
     this.props.resetGridValues();
 
+    // part === 0 indicates that we're in quiz mode
+    if (part === "0") {
+      //will retrieve quiz questions from db
+      console.log(`need quiz questions for lesson ${lesson}`);
+      // axios.get(`/api/quiz/${lesson}`).then(results => {});
+    }
+
     //checks if redux has any lessons on it
-    if (this.props.parts[0]) {
+    else if (this.props.parts[0]) {
       //will update current lesson based on which part is in the match.params
       const lessonPart = { ...this.props.parts[part - 1] };
       this.setState({ lessonPart });
@@ -73,7 +80,7 @@ class CodeEditor extends React.Component {
                 //CurrentToken will render the correct Token based on the type that's passed to it
                 const CurrentToken = componentNames[val.type];
                 return (
-                  <div className="token">
+                  <div className="token" key={id}>
                     <CurrentToken
                       key={id}
                       type={type}
@@ -92,7 +99,7 @@ class CodeEditor extends React.Component {
         <section className="memory-grid">
           {this.state.gridValues.map((val, i) => {
             return (
-              <div className="memory-location">
+              <div className="memory-location" key={i}>
                 <p
                   //To blur the values based on if the testMode is Clickable
                   style={

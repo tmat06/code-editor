@@ -59,13 +59,21 @@ class Landing extends React.Component {
             </Link>
           );
         })}
+        {/* Allows quiz to only appear during parts display */}
+        {this.state.parts[0] ? (
+          <Link to={`/${currentLesson}/${0}`}>
+            <div className="button outline-btn">QUIZ</div>
+          </Link>
+        ) : (
+          <div />
+        )}
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  parts: state.parts;
+  return { parts: state.parts };
 }
 
 export default connect(

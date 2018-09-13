@@ -14,7 +14,7 @@ class Clickable extends React.Component {
   }
 
   componentDidMount() {
-    let { value, connector, type, test } = this.props;
+    let { value, connector, type } = this.props;
     //Updates Grid
     this.props.updateGridValues({ value, connector, type });
     //Toggles Blur of Grid upon Mounting
