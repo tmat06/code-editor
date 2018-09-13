@@ -1,20 +1,14 @@
 import React from "react";
-import Token from "../Token";
 import FillIn from "./FillIn";
 import Clickable from "./Clickable";
 
-export default class VarNameToken extends Token {
+export default class VarNameToken extends React.Component {
   constructor() {
     super();
     this.state = {
       input: "",
       display: ""
     };
-  }
-
-  handleBlur(input, expected, dataType) {
-    let correct = this.validateToken.call(this, input, expected, dataType);
-    if (correct) this.setState({ wrong: false });
   }
 
   render() {
@@ -35,6 +29,7 @@ export default class VarNameToken extends Token {
       borderColor: "#89BDFF",
       color: "white"
     };
+    //Will render correct Test Mode based on Prop
     switch (testMode) {
       case FILL:
         return (
@@ -64,5 +59,3 @@ export default class VarNameToken extends Token {
     }
   }
 }
-
-// value={"VarName"} test={false} prompt={"none"}

@@ -1,7 +1,7 @@
 import React from "react";
-import { toast } from "react-toastify";
-import { connect } from "react-redux";
 import { updateGridValues, toggleAnswer } from "./../../../ducks/reducer";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 class Clickable extends React.Component {
   constructor() {
@@ -15,14 +15,22 @@ class Clickable extends React.Component {
 
   componentDidMount() {
     let { value, connector, type, test } = this.props;
-    if (!test) this.setState({ display: this.props.value });
+    //Updates Grid
     this.props.updateGridValues({ value, connector, type });
+    //Toggles Blur of Grid upon Mounting
     if (this.props.correct) this.props.toggleAnswer();
+  }
+
+  componentWillUnmount() {
+    //Removes Blur of Grid upon Dismount
+    if (!this.props.correct) this.props.toggleAnswer();
   }
 
   validateToken(test) {
     if (test && !this.state.correct) {
+      toast.success("Thats Correct! Task Complete");
       this.setState({ correct: true });
+      //Removes Blur
       this.props.toggleAnswer();
     } else if (test && this.state.correct) {
       toast.success("You already got it correct");
@@ -31,15 +39,10 @@ class Clickable extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    if (!this.props.correct) this.props.toggleAnswer();
-  }
-
   render() {
-    const { value, styles, type, test } = this.props;
-    if (this.state.correct) {
-      toast.success("Thats Correct! Task Complete");
-    }
+    const { value, type, test } = this.props;
+
+    // Render based on the type of the Token
     switch (type) {
       case "VarKeyword":
         return (

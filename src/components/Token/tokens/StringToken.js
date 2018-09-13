@@ -1,9 +1,8 @@
 import React from "react";
-import Token from "../Token";
 import FillIn from "./FillIn";
 import Clickable from "./Clickable";
 
-export default class StringToken extends Token {
+export default class StringToken extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -17,7 +16,7 @@ export default class StringToken extends Token {
       width: value && `${value.length}em`,
       borderColor: `#A6E22E`
     };
-
+    //Will render correct Test Mode based on Prop
     switch (testMode) {
       case FILL:
         return (

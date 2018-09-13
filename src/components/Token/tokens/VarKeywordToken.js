@@ -1,9 +1,8 @@
 import React from "react";
-import Token from "../Token";
 import FillIn from "./FillIn";
 import Clickable from "./Clickable";
 
-export default class VarKeywordToken extends Token {
+export default class VarKeywordToken extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -21,6 +20,7 @@ export default class VarKeywordToken extends Token {
       borderColor: `#FD5FF1`,
       color: "white"
     };
+    //Will render correct Test Mode based on Prop
     switch (testMode) {
       case FILL:
         return (

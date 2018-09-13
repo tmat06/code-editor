@@ -15,12 +15,14 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
+    //Retrieves all Lessons from DB and sets it to Local State
     axios
       .get("/api/lessons")
       .then(results => this.setState({ lessons: [...results.data] }));
   }
 
   partRetriever(lessonNum) {
+    //Retrieves all parts of the Lesson, runs onClick, stores it Locally and on Redux
     axios.get(`/api/parts/${lessonNum}`).then(results => {
       this.setState({ parts: [...results.data], currentLesson: lessonNum });
       this.props.updateLesson(results.data);
@@ -29,7 +31,6 @@ class Landing extends React.Component {
 
   render() {
     let { lessons, parts, currentLesson } = this.state;
-    console.log(this.state.parts);
     return (
       <div>
         {lessons.map(val => {
