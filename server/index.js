@@ -22,6 +22,8 @@ app.use(session({
 app.get("/api/lessons", ctrl.getLessons);
 app.get("/api/parts/:id", ctrl.getParts);
 
+app.get("/api/quiz/:id", ctrl.getQuiz)
+
 //app.use(express.static(`__dirname/build`));
 
 app.post("/api/newQuiz", ctrl.makeQuiz);

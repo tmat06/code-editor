@@ -32,7 +32,8 @@ topic VARCHAR);
 CREATE TABLE quiz
 (id SERIAL PRIMARY KEY,
 lesson integer REFERENCES lessons (id),
-testMode text);
+testMode text,
+instructions text);
 
 CREATE TABLE quiz_tokens
 (id SERIAL PRIMARY KEY,

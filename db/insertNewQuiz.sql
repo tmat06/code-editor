@@ -1,4 +1,4 @@
 INSERT INTO quiz 
-(lesson, testMode)
-VALUES($1, $2)
+(lesson, testMode, instructions)
+VALUES($1, $2, $3)
 RETURNING *;
