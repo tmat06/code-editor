@@ -28,16 +28,16 @@ module.exports = {
     },
     makeQuiz: (req, res) => {
         var {lesson, testMode, tokens} = req.body.sending;
-        console.log(lesson, testMode, tokens)
-
-        // 1 'Clickable' [ { order: 1,
-        //     tokenType: 'VarKeyword',
-        //     value: 'var',
-        //     testable: true,
-        //     connector: 'undefined' } ]
-
         req.app.get("db").insertNewQuiz([lesson, testMode]).then(quiz => {
-            
+            var num = 0
+            tokens.map((token, i) => {
+                req.app.get("db").insertTokens([quiz[0].id, token.order, token.tokenType, token.value, token.testable, token.connector]).then(res => {
+                   num ++ 
+                })
+            })
+            if(num === tokens.length){
+                res.sendStatus(200)
+            }
         })
     }
 }
