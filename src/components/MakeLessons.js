@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from "axios";
 
 export default class MakeLessons extends Component{
     constructor(){
@@ -46,7 +47,7 @@ export default class MakeLessons extends Component{
             ){
             var sending = {lesson, testMode, tokens}
             this.setState=({lesson: "", testMode: "", tokens: [], order: ""})
-            console.log(sending)
+            axios.post("/api/newQuiz", {sending})
         } else {
             alert("Oops. Looks like the lesson or test mode is wrong, or you don't have any tokens...")
         }
