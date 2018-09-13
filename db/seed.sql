@@ -24,6 +24,11 @@ prompt VARCHAR,
 lessonNumber INT, 
 connector TEXT)
 
+CREATE TABLE lessons 
+(id SERIAL PRIMARY KEY,
+number INT,
+topic VARCHAR);
+
 CREATE TABLE quiz
 (id SERIAL PRIMARY KEY,
 lesson integer REFERENCES lessons (id),

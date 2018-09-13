@@ -1,5 +1,5 @@
 module.exports = {
-    getLesson: (req, res) =>{
+    getParts: (req, res) =>{
         var {id} = req.params;
         var goodLessonLayout = []
         req.app.get("db").getLesson(id).then(lesson => {
@@ -19,6 +19,25 @@ module.exports = {
                 }
                 crazyStuff()
             })
+        })
+    },
+    getLessons: (req, res) => {
+        req.app.get("db").getAllLessons().then(lessons => {
+            res.status(200).send(lessons)
+        })
+    },
+    makeQuiz: (req, res) => {
+        var {lesson, testMode, tokens} = req.body.sending;
+        console.log(lesson, testMode, tokens)
+
+        // 1 'Clickable' [ { order: 1,
+        //     tokenType: 'VarKeyword',
+        //     value: 'var',
+        //     testable: true,
+        //     connector: 'undefined' } ]
+
+        req.app.get("db").insertNewQuiz([lesson, testMode]).then(quiz => {
+            
         })
     }
 }
