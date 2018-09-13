@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import CodeEditor from "./components/CodeEditor/CodeEditor";
 import LessonPartsList from "./components/LessonPartsList";
+import MakeLessons from "./components/MakeLessons";
 
 import ComponentStyles from './components/ComponentStyles';
 
@@ -14,5 +15,6 @@ export default (
 
     {/* temporary route for testing custom styled buttons/cards/etc */}
     <Route path="/styles" component={ComponentStyles} />
+    <Route path="/makeLesson" component={MakeLessons} />
   </Switch>
 );

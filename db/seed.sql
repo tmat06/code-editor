@@ -1,25 +1,42 @@
-CREATE TABLE lessons (id SERIAL PRIMARY KEY,
-                        number INT,
-                        topic VARCHAR);
+CREATE TABLE lessons 
+(id SERIAL PRIMARY KEY,
+number INT,
+topic VARCHAR);
 
 
-CREATE TABLE parts (id SERIAL PRIMARY KEY,
-                    number INT,
-                    lessonNumber INT,
-                    title VARCHAR,
-                    description VARCHAR,
-                    testMode VARCHAR);
+CREATE TABLE parts 
+(id SERIAL PRIMARY KEY,
+number INT,
+lessonNumber INT,
+title VARCHAR,
+description VARCHAR,
+testMode VARCHAR);
 
 
-CREATE TABLE tokens (id SERIAL PRIMARY KEY,
-                    number INT,
-                    partNumber INT,
-                    type VARCHAR,
-                    value VARCHAR,
-                    test BOOLEAN,
-                    prompt VARCHAR, 
-                    lessonNumber INT, 
-                    connector TEXT)
+CREATE TABLE tokens 
+(id SERIAL PRIMARY KEY,
+number INT,
+partNumber INT,
+type VARCHAR,
+value VARCHAR,
+test BOOLEAN,
+prompt VARCHAR, 
+lessonNumber INT, 
+connector TEXT)
+
+CREATE TABLE quiz
+(id SERIAL PRIMARY KEY,
+lesson integer REFERENCES lessons (id),
+testMode text);
+
+CREATE TABLE quiz_tokens
+(id SERIAL PRIMARY KEY,
+quiz_id integer REFERENCES quiz (id),
+token_order integer,
+type text,
+value text,
+testable boolean,
+connected_token text);
 
 
 
