@@ -60,38 +60,33 @@ module.exports = {
               num++;
             });
         });
-        console.log("I'm at least getting here");
         res.sendStatus(200);
       });
   },
   getQuiz: (req, res) => {
     var { id } = req.params;
+    var layout = [];
     req.app
       .get("db")
-      .getLesson(id)
-      .then(lesson => {
-        var lessonId = lessons[0].id;
-        req.app.get("db").getQuiz(lessonId);
+      .getQuizzes(id)
+      .then(quizzes => {
+        async function allTheQuizTokens() {
+          for (var i = 0; i < quizzes.length; i++) {
+            await req.app
+              .get("db")
+              .getQuizTokens(quizzes[i].id)
+              .then(tokens => {
+                layout.push({
+                  lesson: quizzes[i].lesson,
+                  testMode: quizzes[i].testMode,
+                  instructions: quizzes[i].instructions,
+                  tokens: tokens
+                });
+              });
+          }
+          res.status(200).send(layout);
+        }
+        allTheQuizTokens();
       });
-
-    // var goodLessonLayout = []
-    // req.app.get("db").getLesson(id).then(lesson => {
-    //     req.app.get("db").getParts(id).then(parts => {
-    //         async function crazyStuff(){
-    //             for(var i = 0; i<parts.length; i++){
-    //                 await req.app.get("db").getTokens(i + 1, id).then(tokens => {
-    //                     goodLessonLayout.push({
-    //                         title: parts[i].title,
-    //                         description: parts[i].description,
-    //                         testMode: parts[i].testmode,
-    //                         tokens: tokens
-    //                     })
-    //                 })
-    //             }
-    //             res.status(200).send(goodLessonLayout)
-    //         }
-    //         crazyStuff()
-    //     })
-    // })
   }
 };
