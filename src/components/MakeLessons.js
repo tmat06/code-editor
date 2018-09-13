@@ -77,7 +77,8 @@ export default class MakeLessons extends Component {
           testMode: "",
           tokens: [],
           order: "",
-          description: ""
+          description: "",
+          num: 0
         });
       });
     } else {
