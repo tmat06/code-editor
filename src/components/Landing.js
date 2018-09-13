@@ -1,18 +1,73 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { updateLesson } from "./../ducks/reducer";
+import { connect } from "react-redux";
 
-export default function Landing() {
-  return (
-    <div className="landing">
-      <Link to="/lessonPartsList/1">
-        <div className="button">Lesson 1</div>
-      </Link>
-      <Link to="/lessonPartsList/2">
-        <div className="button">Lesson 2</div>
-      </Link>
-      <Link to="/lessonPartsList/3">
-        <div className="button">Lesson 3</div>
-      </Link>
-    </div>
-  );
+class Landing extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      lessons: [],
+      parts: [],
+      currentLesson: 0
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("/api/lessons")
+      .then(results => this.setState({ lessons: [...results.data] }));
+  }
+
+  partRetriever(lessonNum) {
+    axios.get(`/api/parts/${lessonNum}`).then(results => {
+      this.setState({ parts: [...results.data], currentLesson: lessonNum });
+      this.props.updateLesson(results.data);
+    });
+  }
+
+  render() {
+    let { lessons, parts, currentLesson } = this.state;
+    console.log(this.state.parts);
+    return (
+      <div>
+        {lessons.map(val => {
+          return (
+            <div className="landing" key={val.id}>
+              <div
+                className="button"
+                onClick={() => this.partRetriever(val.number)}
+              >
+                <div>
+                  Lesson {val.number}
+                  <br />
+                  {val.topic}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        {parts.map((val, i) => {
+          return (
+            <Link to={`/${currentLesson}/${i + 1}`} key={i}>
+              <div className="button outline-btn">
+                {/* can be replaced with val.title once database has correct information */}
+                {val.title}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    );
+  }
 }
+
+function mapStateToProps(state) {
+  parts: state.parts;
+}
+
+export default connect(
+  mapStateToProps,
+  { updateLesson }
+)(Landing);

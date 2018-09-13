@@ -1,23 +1,5 @@
 var initialState = {
-  parts: [
-    {
-      title: "",
-      description: "",
-      testMode: "",
-      tokens: [
-        {
-          id: 0,
-          number: 0,
-          partnumber: 0,
-          type: "",
-          value: "",
-          test: false,
-          prompt: "none",
-          lessonnumber: 0
-        }
-      ]
-    }
-  ],
+  parts: [],
   gridValues: [],
   correct: true
 };

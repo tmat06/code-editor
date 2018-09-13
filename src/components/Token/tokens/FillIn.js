@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updateGridValues } from "./../../../ducks/reducer";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 class FillIn extends React.Component {
   constructor() {
@@ -14,6 +14,7 @@ class FillIn extends React.Component {
   }
 
   componentDidMount() {
+    console.log("test");
     let { value, connector, type, test } = this.props;
     if (!test) this.setState({ display: value });
     if (!test) this.props.updateGridValues({ value, connector, type });
@@ -21,7 +22,7 @@ class FillIn extends React.Component {
 
   testValidator(test) {
     if (test) {
-      this.setState({ input: ""});
+      this.setState({ input: "" });
     }
   }
 
@@ -32,21 +33,21 @@ class FillIn extends React.Component {
     if (!input) {
       return;
     } else if (typeof input !== type) {
-      this.setState({wrong: true})
+      this.setState({ wrong: true });
       setTimeout(() => {
-        this.setState({wrong: false})
+        this.setState({ wrong: false });
       }, 2);
       toast.error("wrong input type");
     } else if (value && input && input !== value) {
-      this.setState({wrong: true})
+      this.setState({ wrong: true });
       setTimeout(() => {
-        this.setState({wrong: false})
+        this.setState({ wrong: false });
       }, 1000);
       toast.error(`Wrong value... we expected: ${value}`);
-    }else {
+    } else {
       // all tests have passed, so we can update our display;
       this.setState({ display: input });
-  
+
       // need the varname and the value passed here
       console.log(input, connector, token);
       this.props.updateGridValues({ value: input, connector, type: token });
@@ -75,8 +76,12 @@ class FillIn extends React.Component {
                     ? this.validateToken(input, connector, type, "string")
                     : null
                 }
-                className={this.state.wrong ? "input-box input-animation": "input-box"}
-                onChange={e => this.setState({ input: e.target.value, wrong: false })}
+                className={
+                  this.state.wrong ? "input-box input-animation" : "input-box"
+                }
+                onChange={e =>
+                  this.setState({ input: e.target.value, wrong: false })
+                }
                 style={styles}
               />
             )}
@@ -85,7 +90,7 @@ class FillIn extends React.Component {
       case "VarName":
         return (
           <div
-            className="token var-name"
+            className="token var-keyword"
             onClick={() => this.testValidator(test)}
           >
             {display || (
@@ -100,7 +105,9 @@ class FillIn extends React.Component {
                     : null
                 }
                 defaultValue={input}
-                className={this.state.wrong ? "input-box input-animation": "input-box"}
+                className={
+                  this.state.wrong ? "input-box input-animation" : "input-box"
+                }
                 onChange={e =>
                   this.setState({
                     input: e.target.value,
@@ -130,11 +137,13 @@ class FillIn extends React.Component {
                     : null
                 }
                 defaultValue={input}
-                className={this.state.wrong ? "input-box input-animation": "input-box"}
+                className={
+                  this.state.wrong ? "input-box input-animation" : "input-box"
+                }
                 onChange={e =>
                   this.setState({
                     input: e.target.value,
-                    wrong:false
+                    wrong: false
                   })
                 }
                 style={styles}
@@ -160,8 +169,12 @@ class FillIn extends React.Component {
                     : null
                 }
                 defaultValue={input}
-                className={this.state.wrong ? "input-box input-animation": "input-box"}
-                onChange={e => this.setState({ input: e.target.value, wrong:false })}
+                className={
+                  this.state.wrong ? "input-box input-animation" : "input-box"
+                }
+                onChange={e =>
+                  this.setState({ input: e.target.value, wrong: false })
+                }
                 style={styles}
               />
             )}
