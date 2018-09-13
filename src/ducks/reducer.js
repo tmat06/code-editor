@@ -23,7 +23,7 @@ export default function reducer(state = initialState, action) {
 
       if (type === "VarName") {
         let index;
-        temp.map((val, i) => {
+        temp.forEach((val, i) => {
           //Runs through all variables stored on the gridValues to see if the values match the connector of the input
           if (val.value === connector) {
             index = i;
@@ -41,7 +41,7 @@ export default function reducer(state = initialState, action) {
       //Similar but for "String" data types
       if (type === "String") {
         let index;
-        temp.map((val, i) => {
+        temp.forEach((val, i) => {
           if (val.varName === connector) {
             index = i;
             match = val;

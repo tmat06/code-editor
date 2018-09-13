@@ -1,6 +1,6 @@
 import React from "react";
-import Clickable from "./Clickable";
 import FillIn from "./FillIn";
+import Clickable from "./Clickable";
 
 // we could use a list of valid inputs to test what they give us
 const validOperators = ["+", "-", "*", "/"];

@@ -31,7 +31,7 @@ class FillIn extends React.Component {
   validateToken = (input, connector, token, type) => {
     let { value } = this.props;
     //Converts user input into a Number if possible, else keeps to a String
-    +input ? (input = +input) : (input = input);
+    if (+input) input = +input;
     if (!input) {
       return;
     } else if (typeof input !== type) {
