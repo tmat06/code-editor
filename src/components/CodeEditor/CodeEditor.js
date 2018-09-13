@@ -1,11 +1,13 @@
 import React from "react";
+import axios from "axios";
+//Redux
+import { resetGridValues, updateLesson } from "./../../ducks/reducer";
 import { connect } from "react-redux";
+//Token Templates
 import VarKeywordToken from "./../Token/tokens/VarKeywordToken";
 import VarNameToken from "../Token/tokens/VarNameToken";
 import OperatorToken from "./../Token/tokens/OperatorToken";
 import StringToken from "./../Token/tokens/StringToken";
-import { Button, Modal, Header } from "semantic-ui-react";
-import { resetGridValues } from "./../../ducks/reducer";
 
 const componentNames = {
   VarKeyword: VarKeywordToken,
@@ -19,6 +21,7 @@ class CodeEditor extends React.Component {
     super();
     this.state = {
       lessonPart: {},
+      // gridValues should never be modified, changes will be shown in the Testing Components(Clickable, FillIn, etc...) via redux
       gridValues: [
         { num: 1011, name: "Var Name", value: "Undefined" },
         { num: 1012, name: "Var Name", value: "Undefined" },
@@ -34,22 +37,31 @@ class CodeEditor extends React.Component {
   }
 
   componentDidMount() {
-    const { part } = this.props.match.params;
-    if (this.props.parts) {
+    const { lesson, part } = this.props.match.params;
+
+    //resets any previous redux changes for the grid
+    this.props.resetGridValues();
+
+    //checks if redux has any lessons on it
+    if (this.props.parts[0]) {
+      //will update current lesson based on which part is in the match.params
       const lessonPart = { ...this.props.parts[part - 1] };
       this.setState({ lessonPart });
+    } else {
+      //if no lesson on redux, axios call will be made to place the correct lesson on redux
+      axios.get(`/api/parts/${lesson}`).then(results => {
+        this.props.updateLesson(results.data);
+        const lessonPart = { ...this.props.parts[part - 1] };
+        this.setState({ lessonPart });
+      });
     }
-    this.props.resetGridValues();
-    //call to redux with proper part id
   }
 
   render() {
     const { testMode, title, description, tokens } = this.state.lessonPart;
-    console.log(this.state.lessonPart);
     return (
       <div className="code-editor-wrapper">
         <div className="card">
-          {/* Display Modal here */}
           <div className="instructions">
             <h1>{title}</h1>
             <h3>{testMode}</h3>
@@ -58,7 +70,7 @@ class CodeEditor extends React.Component {
           {tokens
             ? tokens.map((val, i) => {
                 const { id, type, test, prompt, value, connector } = val;
-
+                //CurrentToken will render the correct Token based on the type that's passed to it
                 const CurrentToken = componentNames[val.type];
                 return (
                   <div className="token">
@@ -76,12 +88,15 @@ class CodeEditor extends React.Component {
               })
             : ""}
         </div>
+        {/* The Grid  \/ */}
         <section className="memory-grid">
           {this.state.gridValues.map((val, i) => {
             return (
               <div className="memory-location">
                 <p
+                  //To blur the values based on if the testMode is Clickable
                   style={
+                    //this.props.correct is updated on redux once the answer is correct on the Clickable component
                     this.props.correct
                       ? {}
                       : {
@@ -140,5 +155,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { resetGridValues }
+  { resetGridValues, updateLesson }
 )(CodeEditor);

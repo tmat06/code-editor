@@ -14,6 +14,7 @@ class FillIn extends React.Component {
   }
 
   componentDidMount() {
+    console.log("test");
     let { value, connector, type, test } = this.props;
     if (!test) this.setState({ display: value });
     if (!test) this.props.updateGridValues({ value, connector, type });
@@ -87,33 +88,37 @@ class FillIn extends React.Component {
           </div>
         );
       case "VarName":
-        return;
-        {
-          display || (
-            <input
-              autoFocus
-              onBlur={() =>
-                this.validateToken(input, connector, type, "string")
-              }
-              onKeyUp={e =>
-                e.keyCode === 13
-                  ? this.validateToken(input, connector, type, "string")
-                  : null
-              }
-              defaultValue={input}
-              className={
-                this.state.wrong ? "input-box input-animation" : "input-box"
-              }
-              onChange={e =>
-                this.setState({
-                  input: e.target.value,
-                  wrong: false
-                })
-              }
-              style={styles}
-            />
-          );
-        }
+        return (
+          <div
+            className="token var-keyword"
+            onClick={() => this.testValidator(test)}
+          >
+            {display || (
+              <input
+                autoFocus
+                onBlur={() =>
+                  this.validateToken(input, connector, type, "string")
+                }
+                onKeyUp={e =>
+                  e.keyCode === 13
+                    ? this.validateToken(input, connector, type, "string")
+                    : null
+                }
+                defaultValue={input}
+                className={
+                  this.state.wrong ? "input-box input-animation" : "input-box"
+                }
+                onChange={e =>
+                  this.setState({
+                    input: e.target.value,
+                    wrong: false
+                  })
+                }
+                style={styles}
+              />
+            )}
+          </div>
+        );
       case "String":
         return (
           <div
