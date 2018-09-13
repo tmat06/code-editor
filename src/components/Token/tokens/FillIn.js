@@ -10,19 +10,19 @@ class FillIn extends React.Component {
     this.state = {
       input: "",
       display: "",
-      error: false
+      wrong: false
     };
   }
 
   componentDidMount() {
     let { value, connector, type, test } = this.props;
-    if (!this.props.test) this.setState({ display: this.props.value });
+    if (!test) this.setState({ display: value });
     if (!test) this.props.updateGridValues({ value, connector, type });
   }
 
   testValidator(test) {
     if (test) {
-      this.setState({ input: "" });
+      this.setState({ input: ""});
     }
   }
 
@@ -33,18 +33,16 @@ class FillIn extends React.Component {
     if (!input) {
       return;
     } else if (typeof input !== type) {
-      this.setState({ error: !this.state.error }, () => {
-        setTimeout(() => {
-          this.setState({ error: !this.state.error });
-        }, 1000);
-      });
+      this.setState({wrong: true})
+      setTimeout(() => {
+        this.setState({wrong: false})
+      }, 2);
       toast.error("wrong input type");
     } else if (value && input && input !== value) {
-      this.setState({ error: !this.state.error }, () => {
-        setTimeout(() => {
-          this.setState({ error: !this.state.error });
-        }, 1000);
-      });
+      this.setState({wrong: true})
+      setTimeout(() => {
+        this.setState({wrong: false})
+      }, 1000);
       toast.error(`Wrong value... we expected: ${value}`);
     } else {
       // all tests have passed, so we can update our display;
@@ -78,67 +76,37 @@ class FillIn extends React.Component {
                     ? this.validateToken(input, connector, type, "string")
                     : null
                 }
-                className="input-box"
-                onChange={e => this.setState({ input: e.target.value })}
+                className={this.state.wrong ? "input-box input-animation": "input-box"}
+                onChange={e => this.setState({ input: e.target.value, wrong: false })}
                 style={styles}
               />
             )}
           </div>
         );
       case "VarName":
-        return (
-          <Motion
-            defaultStyle={{ x: 0 }}
-            style={{
-              x: this.state.error
-                ? spring(20, presets.wobbly)
-                : spring(0, presets.wobbly)
-            }}
-          >
-            {mot => {
-              return (
-                <div
-                  className="token var-name"
-                  onClick={() => this.testValidator(test)}
-                >
-                  {display || (
-                    <input
-                      autoFocus
-                      onBlur={() =>
-                        this.validateToken(input, connector, type, "string")
-                      }
-                      onKeyUp={e =>
-                        e.keyCode === 13
-                          ? this.validateToken(input, connector, type, "string")
-                          : null
-                      }
-                      defaultValue={input}
-                      className="input-box"
-                      onChange={e =>
-                        this.setState({
-                          input: e.target.value,
-                          varName: e.target.value
-                        })
-                      }
-                      style={
-                        this.state.error
-                          ? {
-                              width:
-                                this.props.value &&
-                                `${this.props.value.length}em`,
-                              borderColor: "red",
-                              transform: `translateX(${mot.x}px)`,
-                              color: "red"
-                            }
-                          : styles
-                      }
-                    />
-                  )}
-                </div>
-              );
-            }}
-          </Motion>
-        );
+        return 
+            {display || (
+              <input
+                autoFocus
+                onBlur={() =>
+                  this.validateToken(input, connector, type, "string")
+                }
+                onKeyUp={e =>
+                  e.keyCode === 13
+                    ? this.validateToken(input, connector, type, "string")
+                    : null
+                }
+                defaultValue={input}
+                className={this.state.wrong ? "input-box input-animation": "input-box"}
+                onChange={e =>
+                  this.setState({
+                    input: e.target.value,
+                    wrong: false
+                  })
+                }
+                style={styles}
+              />
+        )}
       case "String":
         return (
           <div
@@ -157,11 +125,11 @@ class FillIn extends React.Component {
                     : null
                 }
                 defaultValue={input}
-                className="input-box"
+                className={this.state.wrong ? "input-box input-animation": "input-box"}
                 onChange={e =>
                   this.setState({
                     input: e.target.value,
-                    varValue: e.target.value
+                    wrong:false
                   })
                 }
                 style={styles}
@@ -187,8 +155,8 @@ class FillIn extends React.Component {
                     : null
                 }
                 defaultValue={input}
-                className="input-box"
-                onChange={e => this.setState({ input: e.target.value })}
+                className={this.state.wrong ? "input-box input-animation": "input-box"}
+                onChange={e => this.setState({ input: e.target.value, wrong:false })}
                 style={styles}
               />
             )}

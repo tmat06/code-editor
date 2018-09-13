@@ -86,3 +86,26 @@ input {
     border: 0;
   }
 }
+
+@keyframes shake {
+  25% {
+    margin-left: 0.5em;
+    color: red;
+    border-color: red;
+  }
+  50% {
+    margin-left: 0em;
+    color: red;
+    border-color: red;
+  }
+  75% {
+    margin-left: 0.5em;
+    color: red;
+    border-color: red;
+  }
+}
+
+.input-animation {
+  animation-name: shake !important;
+  animation-duration: 0.5s;
+}
