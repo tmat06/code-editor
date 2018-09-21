@@ -79,7 +79,7 @@ quiz_tokens:
 --This is a string of any length. This is just like the type column in the tokens table. But it refers to the token type. The types are VarKeyword, VarName, String, and Operator (please keep these cammel cased the way we have them here). So if it's 'var' it would be VarKeyword, 'greeting' would be VarName because it's the name of the variable, '=' or ';' would be Operator, and whatever string we set it equal to would be String. We haven't written token types for functions or integers or anything yet.
 -value
 --This is a string of any length. It's just like the value column in the tokens table. It's the actual value of the token. So var would be 'var', greeting would be 'greeting', ; would be ';'.
--testable
+-test
 --This is a boolean. It's just like the testable column on the tokens table. So if this is the word they're going to fill in or click on, it will be set to true in this column. Usually only one in each group of tokens or part will be set to true, and rest will be false. But do what you want.
 -connected_token
 --This is a string of any length. It's just like the connector column on the tokens table. This one is a little hard to explain. So to make the grid of memory on the right side of the screen to work with variables, we had to have this column in the database. So in the case of an exercise that looks like this:
