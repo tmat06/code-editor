@@ -1,5 +1,5 @@
 import React from "react";
-import { updateGridValues, toggleAnswer } from "./../../../ducks/reducer";
+import { updateGridValues, answerToFalse, answerToTrue } from "./../../../ducks/reducer";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -18,12 +18,12 @@ class Clickable extends React.Component {
     //Updates Grid
     this.props.updateGridValues({ value, connector, type });
     //Toggles Blur of Grid upon Mounting
-    if (this.props.correct) this.props.toggleAnswer();
+    if (this.props.correct) this.props.answerToFalse();
   }
 
   componentWillUnmount() {
     //Removes Blur of Grid upon Dismount
-    if (!this.props.correct) this.props.toggleAnswer();
+    if (!this.props.correct) this.props.answerToTrue();
   }
 
   validateToken(test) {
@@ -31,7 +31,7 @@ class Clickable extends React.Component {
       toast.success("Thats Correct! Task Complete");
       this.setState({ correct: true });
       //Removes Blur
-      this.props.toggleAnswer();
+      this.props.answerToTrue();
     } else if (test && this.state.correct) {
       toast.success("You already got it correct");
     } else {
@@ -100,5 +100,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { updateGridValues, toggleAnswer }
+  { updateGridValues, answerToFalse, answerToTrue }
 )(Clickable);

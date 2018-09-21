@@ -1,0 +1,89 @@
+So the database is a little bit complicated. Starting with lessons, there is a lesson table with the columns:
+
+lessons:
+-id
+--This is a serial primary key
+-number
+--This is an integer. If it's lesson 1, it'll be a 1, if it's lesson 2, it'll be a 2, and so on.
+-topic
+--This is any amount of text. Give just a little taste of what the lesson topic is. For expample: If the lesson is about variables, then this will just say variables.
+
+
+The lessons have parts. So lesson 1 will have 1.1, 1.2, 1.3 and so on, and the parts are the .1 or 2 or whatever part of that lesson. The table looks like this:
+
+parts:
+-id
+--This is a serial primary key
+-number
+--This is an integer. Like the lessons table, it'll be a 1 or 2 or whatever we need it to be. Whatever part it is. Example: if it's 1.1, it'll be a 1, 1.2 will be a 2.
+-lessonNumber
+--This is an integer. This corresponds to the lessons table but is not a foreign key, if it's lesson 1 it'll be a 1 and so on.
+-title
+--This is a string of any length. It's usally just Lesson 1.1 or Lesson 1.2 depending on what lesson and part.
+-description
+--This is also a string of any length. It's just a short description of what the lesson is. Here's a short expample: "We use the keyword 'var' to initialize variales, try using it below".
+-testMode
+--This is also a string of any length. But so far, there are only test modes of "Clickable" and "Fill in" (Please insert them just like this). These correspond to the way they will finish the exercise. So sometimes, we want to fill in the keyword "var" and sometimes we want them to click on the keyword var. It depends on what you want them to do.
+
+
+Next we have the tokens table. This one is a little harder to explain, but basically the way we built this, everything that renders in the actual exercise is a token. So in the exercise:
+var greeting;
+The word "var" is a token, the word "greeting" is a different token, and the operator ";" is also a token. These go in this table. It's laid out as follows:
+
+Tokens:
+-id
+--This a serial primary key
+-number
+--This is an integer. This is the order of the token in the exercise. So in our example from above, 'var' would be 1 and 'greeting' would be 2, and it starts over for every exercise. So 'var' for the next exercise will also be 1.
+-partNumber
+--This corresponds to the parts table but is not a foreign key. So if it goes to part 1.2, the part number would be 2, 1.3 would be 3.
+-type
+--This is a string of any length. But it refers to the token type. The types are VarKeyword, VarName, String, and Operator (please keep these cammel cased the way we have them here). So if it's 'var' it would be VarKeyword, 'greeting' would be VarName because it's the name of the variable, '=' or ';' would be Operator, and whatever string we set it equal to would be String. We haven't written token types for functions or integers or anything yet.
+-value
+--This is also a string of any length. It's the actual value of the token. So var would be 'var', greeting would be 'greeting', ; would be ';'.
+-test
+--This is a boolean. So if this is the word they're going to fill in or click on, it will be set to true in this column. Usually only one in each group of tokens or part will be set to true, and rest will be false. But do what you want.
+-prompt
+--This was going to be what pops up on the little toast at the top of the screen if they clicked on the wrong value for the clickable exercises. As of right now, they're all set to the string "none".
+-lessonNumber
+--This is an integer. It corresponds to the lesson number, but is not a foreign key. So if this is a token for 1.2, it'll be a 1, 2.3 will be a 2.
+-connector
+--This is a string of any length. This one is a little hard to explain. So to make the grid of memory on the right side of the screen to work with variables, we had to have this column in the database. So in the case of an exercise that looks like this:
+var greeting = "hello";
+The token greeting will have the connector value of hello, and hello will have the connector value of greeting. This is so that on the front end, we can make sure we put the right values in the right slots. If there isn't a connector, like in the case of the keyword var or the operators, just set this column to "undefined".
+
+
+So that is it for the regular lessons, but now we have the quiz tables. We decided to make new tables for these. So first we have the quiz table. The quiz table is a lot like the parts table. It's laid out as follows:
+
+Quiz
+-id
+--This is a serial primary key.
+-lesson
+--This is an integer. It references the lessons table. This one actually is a foreign key that references the id column in the lessons table.
+-testMode
+--This is a string of any length. But like I said in the parts table, so far, there are only test modes of "Clickable" and "Fill in" (Please insert them just like this). These correspond to the way they will finish the exercise. So sometimes, we want to fill in the keyword "var" and sometimes we want them to click on the keyword var. It depends on what you want them to do.
+-instructions
+--This is a string of any length. Just like the parts table description, It's just a short description of what the lesson is. Here's a short expample: "We use the keyword 'var' to initialize variales, try using it below".
+
+
+Lastly we have the quiz_tokens table. This table holds all the tokens for the specific quiz exercise. It's a lot like the quiz table from above. It's laid out as follows:
+
+quiz_tokens:
+-id
+--This is a serial primary key.
+-quiz_id
+--This is an integer. It corresponds to the quiz table, and is a foreign key. It references the id column in the quiz table.
+-token_order
+--This is an integer. It's a lot like the number column in the tokens table. This is the order of the token in the exercise. So in our example from above, 'var' would be 1 and 'greeting' would be 2, and it starts over for every exercise. So 'var' for the next exercise will also be 1.
+-type
+--This is a string of any length. This is just like the type column in the tokens table. But it refers to the token type. The types are VarKeyword, VarName, String, and Operator (please keep these cammel cased the way we have them here). So if it's 'var' it would be VarKeyword, 'greeting' would be VarName because it's the name of the variable, '=' or ';' would be Operator, and whatever string we set it equal to would be String. We haven't written token types for functions or integers or anything yet.
+-value
+--This is a string of any length. It's just like the value column in the tokens table. It's the actual value of the token. So var would be 'var', greeting would be 'greeting', ; would be ';'.
+-testable
+--This is a boolean. It's just like the testable column on the tokens table. So if this is the word they're going to fill in or click on, it will be set to true in this column. Usually only one in each group of tokens or part will be set to true, and rest will be false. But do what you want.
+-connected_token
+--This is a string of any length. It's just like the connector column on the tokens table. This one is a little hard to explain. So to make the grid of memory on the right side of the screen to work with variables, we had to have this column in the database. So in the case of an exercise that looks like this:
+var greeting = "hello";
+The token greeting will have the connector value of hello, and hello will have the connector value of greeting. This is so that on the front end, we can make sure we put the right values in the right slots. If there isn't a connector, like in the case of the keyword var or the operators, just set this column to "undefined".
+
+And there you have it! That's the database so far!

@@ -24,10 +24,7 @@ prompt VARCHAR,
 lessonNumber INT, 
 connector TEXT)
 
-CREATE TABLE lessons 
-(id SERIAL PRIMARY KEY,
-number INT,
-topic VARCHAR);
+
 
 CREATE TABLE quiz
 (id SERIAL PRIMARY KEY,
@@ -58,7 +55,7 @@ VALUES (1, 1, 'Lesson 1.1', 'We can use the keyword "var" to declare variables, 
 
 INSERT INTO parts
 (number, lessonnumber, title, description, testMode)
-VALUES (2, 1, 'Lesson 1.2', 'Words are represented in memory as a type of data  called "strings". To create a string, we surround a word with quotes. We can also store strings in our variables using the assignment operator (= sign). Store the string "hello" in our greeting variable.');
+VALUES (2, 1, 'Lesson 1.2', 'Words are represented in memory as a type of data  called "strings". To create a string, we surround a word with quotes. We can also store strings in our variables using the assignment operator (= sign). Store the string "hello" in our greeting variable.', 'Fill in');
 
 INSERT INTO parts
 (number, lessonnumber, title, description, testMode)
