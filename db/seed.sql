@@ -38,7 +38,7 @@ quiz_id integer REFERENCES quiz (id),
 token_order integer,
 type text,
 value text,
-testable boolean,
+test boolean,
 connected_token text);
 
 
