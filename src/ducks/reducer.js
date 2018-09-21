@@ -8,7 +8,8 @@ var initialState = {
 const UPDATE_LESSON = "UPDATE_LESSON";
 const UPDATE_GRID_VALUES = "UPDATE_GRID_VALUES";
 const RESET_GRID_VALUES = "RESET_GRID_VALUES";
-const TOGGLE_ANSWER = "TOGGLE_ANSWER";
+const ANSWER_TO_FALSE = "ANSWER_TO_FALSE";
+const ANSWER_TO_TRUE = "ANSWER_TO_TRUE";
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -60,8 +61,11 @@ export default function reducer(state = initialState, action) {
     case RESET_GRID_VALUES:
       return Object.assign({}, state, { gridValues: [] });
 
-    case TOGGLE_ANSWER:
-      return Object.assign({}, state, { correct: !state.correct });
+    case ANSWER_TO_FALSE:
+      return Object.assign({}, state, { correct: false });
+
+    case ANSWER_TO_TRUE:
+      return Object.assign({}, state, {correct: true})
 
     default:
       return state;
@@ -81,6 +85,10 @@ export function resetGridValues() {
   return { type: RESET_GRID_VALUES };
 }
 
-export function toggleAnswer() {
-  return { type: TOGGLE_ANSWER };
+export function answerToFalse() {
+  return { type: ANSWER_TO_FALSE };
+}
+
+export function answerToTrue() {
+  return{ type: ANSWER_TO_TRUE}
 }

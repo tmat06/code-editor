@@ -53,7 +53,6 @@ class Landing extends React.Component {
           return (
             <Link to={`/${currentLesson}/${i + 1}`} key={i}>
               <div className="button outline-btn">
-                {/* can be replaced with val.title once database has correct information */}
                 {val.title}
               </div>
             </Link>

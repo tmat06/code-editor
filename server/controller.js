@@ -1,4 +1,7 @@
+var _ = require('lodash');
+
 module.exports = {
+  // This endpoint grabs all the parts in a specific lesson.
   getParts: (req, res) => {
     var { id } = req.params;
     var goodLessonLayout = [];
@@ -30,6 +33,7 @@ module.exports = {
           });
       });
   },
+  // This is the endpoint we hit on the dashboard view. It grabs all the lessons that are in the database.
   getLessons: (req, res) => {
     req.app
       .get("db")
@@ -38,13 +42,13 @@ module.exports = {
         res.status(200).send(lessons);
       });
   },
+  // This is the endpoint that is hit when you click submit quiz on the make lesson page.
   makeQuiz: (req, res) => {
     var { lesson, testMode, tokens, description } = req.body.sending;
     req.app
       .get("db")
       .insertNewQuiz([lesson, testMode, description])
       .then(quiz => {
-        var num = 0;
         tokens.map((token, i) => {
           req.app
             .get("db")
@@ -53,16 +57,16 @@ module.exports = {
               token.order,
               token.tokenType,
               token.value,
-              token.testable,
+              token.test,
               token.connector
             ])
             .then(res => {
-              num++;
             });
         });
         res.sendStatus(200);
       });
   },
+  // This endpoint we hit when we get to the end of the lesson and go to the quiz for that lesson. It grabs a couple quiz questions from the lesson you're on and the lessons before.
   getQuiz: (req, res) => {
     var { id } = req.params;
     var layout = [];
@@ -78,13 +82,13 @@ module.exports = {
               .then(tokens => {
                 layout.push({
                   lesson: quizzes[i].lesson,
-                  testMode: quizzes[i].testMode,
-                  instructions: quizzes[i].instructions,
+                  testMode: quizzes[i].testmode,
+                  description: quizzes[i].instructions,
                   tokens: tokens
                 });
               });
           }
-          res.status(200).send(layout);
+          res.status(200).send(_.shuffle(layout));
         }
         allTheQuizTokens();
       });

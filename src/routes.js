@@ -13,6 +13,8 @@ export default (
 
     {/* temporary route for testing custom styled buttons/cards/etc */}
     <Route path="/styles" component={ComponentStyles} />
+
+    {/* This is a temporary path that leads to a form that helps you easily put quizzes into the database */}
     <Route path="/makeLesson" component={MakeLessons} />
   </Switch>
 );

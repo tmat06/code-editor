@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+// This is a form to help you easily put quizzes into the database. This page can look a little confusing, but just fill in the form. If there is a bad input, it will tell you. And I tried to put good instructions on the form. When you're done creating the token, press the submit token button, and then if you need to do another token for that lesson part, click new token. When you're all done, click submit token and then submit quiz. It'll give you a success message and then you can do another one.
+
+
 export default class MakeLessons extends Component {
   constructor() {
     super();
@@ -12,14 +15,14 @@ export default class MakeLessons extends Component {
       order: "",
       tokenType: "",
       value: "",
-      testable: false,
+      test: false,
       connector: "",
       num: 0
     };
   }
 
   addToken() {
-    var { order, tokenType, value, testable, connector, num } = this.state;
+    var { order, tokenType, value, test, connector, num } = this.state;
     var tokens = {
       VarName: "VarName",
       VarKeyword: "VarKeyword",
@@ -31,12 +34,12 @@ export default class MakeLessons extends Component {
         typeof order === "number" &&
         tokens[tokenType] &&
         value &&
-        testable !== "" &&
+        test !== "" &&
         connector === "undefined") ||
       typeof connector === "string"
     ) {
       var temp = [...this.state.tokens];
-      temp.push({ order, tokenType, value, testable, connector });
+      temp.push({ order, tokenType, value, test, connector });
       this.setState({ tokens: [...temp], num: ++num });
     } else {
       alert("Uh-oh. Something in the tokens part doesn't look right...");
@@ -50,7 +53,7 @@ export default class MakeLessons extends Component {
         order: this.state.order + 1,
         tokenType: "",
         value: "",
-        testable: false,
+        test: false,
         connector: ""
       });
     } else {
@@ -112,7 +115,7 @@ export default class MakeLessons extends Component {
           </button>
           <button
             className="button"
-            onClick={() => this.setState({ testMode: "Fill-In" })}
+            onClick={() => this.setState({ testMode: "Fill in" })}
           >
             Fill in
           </button>
@@ -150,16 +153,16 @@ export default class MakeLessons extends Component {
             value={this.state.value}
           />
           <h3>Testable?</h3>
-          <p>{this.state.testable ? "true" : "false"}</p>
+          <p>{this.state.test ? "true" : "false"}</p>
           <button
             className="button"
-            onClick={() => this.setState({ testable: true })}
+            onClick={() => this.setState({ test: true })}
           >
             True
           </button>
           <button
             className="button"
-            onClick={() => this.setState({ testable: false })}
+            onClick={() => this.setState({ test: false })}
           >
             False
           </button>
@@ -202,7 +205,7 @@ export default class MakeLessons extends Component {
                     <p>{token.order}</p>
                     <p>{token.tokenType}</p>
                     <p>{token.value}</p>
-                    <p>{token.testable}</p>
+                    <p>{token.test}</p>
                     <p>{token.connector}</p>
                     <br />
                   </div>
